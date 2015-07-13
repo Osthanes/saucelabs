@@ -48,5 +48,9 @@ debugme echo "USER_ID: ${SAUCE_USERNAME}"
 
 npm install
 
+npm install mocha-multi
+npm install mocha-jenkins-reporter
+
+multi='dot=dot.txt mocha-jenkins-reporter=-' mocha -R mocha-multi
 echo "Starting test"
 npm test
