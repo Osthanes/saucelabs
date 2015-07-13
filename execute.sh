@@ -47,4 +47,4 @@ debugme echo "SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}"
 debugme echo "USER_ID: ${SAUCE_USERNAME}"
 
 echo "Starting test"
-grunt
+npm test
