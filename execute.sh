@@ -43,12 +43,8 @@ if [ -z "${SAUCE_ACCESS_KEY}" ]; then
     exit 1     
 fi 
 
+debugme echo "BLAZEMETER_APIKEY: ${SAUCE_ACCESS_KEY}"
+debugme echo "TEST_ID: ${SAUCE_USERNAME}"
 
-debugme echo "TEST_URL: ${TEST_URL}"
-debugme echo "TEST_ROUTE_URL: ${TEST_ROUTE_URL}"
-debugme echo "BLAZEMETER_APIKEY: ${BLAZEMETER_APIKEY}"
-debugme echo "TEST_ID: ${TEST_ID}"
-
-#debugme echo "curl -X get https://a.blazemeter.com:443/api/latest/tests/${TEST_ID}/start -H "Content-Type: application/json" -H "x-api-key: ${BLAZEMETER_APIKEY}"
 echo "Starting test"
-curl -X get https://a.blazemeter.com:443/api/latest/tests/${TEST_ID}/start -H "Content-Type: application/json" -H "x-api-key: ${BLAZEMETER_APIKEY}"
+grunt
