@@ -43,8 +43,8 @@ if [ -z "${SAUCE_ACCESS_KEY}" ]; then
     exit 1     
 fi 
 
-debugme echo "BLAZEMETER_APIKEY: ${SAUCE_ACCESS_KEY}"
-debugme echo "TEST_ID: ${SAUCE_USERNAME}"
+debugme echo "SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}"
+debugme echo "USER_ID: ${SAUCE_USERNAME}"
 
 echo "Starting test"
 grunt
