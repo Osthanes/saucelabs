@@ -35,12 +35,12 @@ set +x
 
 if [ -z "${SAUCE_USERNAME}" ]; then
     echo -e "${red}No SAUCE_USERNAME defined, please enter your username in the stage configuration.${no_color}"
-    exit 0     
+    exit 1     
 fi 
 
 if [ -z "${SAUCE_ACCESS_KEY}" ]; then 
     echo -e "${red}No SAUCE_ACCESS_KEY defined, please either select for the service to be added, or define SAUCE_ACCESS_KEY in the stage configuration${no_color}"
-    exit 0     
+    exit 1     
 fi 
 
 debugme echo "SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}"
