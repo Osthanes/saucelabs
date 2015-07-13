@@ -33,7 +33,7 @@ set +x
 set +e 
 export INIT_START_TIME=$(date +\"%s\")
 
-export USER_ID=#USER_ID#
+export SAUCE_USERNAME=#USER_ID#
         
 . $EXT_DIR/_init.sh
 INIT_END_TIME=$(date +\"%s\")
