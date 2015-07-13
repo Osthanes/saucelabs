@@ -46,5 +46,7 @@ fi
 debugme echo "SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}"
 debugme echo "USER_ID: ${SAUCE_USERNAME}"
 
+npm install
+
 echo "Starting test"
 npm test
