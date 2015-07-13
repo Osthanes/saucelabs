@@ -1,0 +1,50 @@
+{
+    "id": "ibm.devops.services.pipeline.saucelabs",
+    "version": 1,
+    "name_key": "ExtName",
+    "desc_key": "ExtDesc",
+    "extension_type": "Test",
+    "message_key": "ExtMessage",
+    "inputs": [
+        {
+            "type": "Bluemix",
+            "inclusion" : "always"
+        }
+    ],
+    "params": [
+        {
+            "name": "USER_ID",
+            "type": "Text",
+            "required": "true",
+            "default_value": "",
+            "label_key": "USER_ID_KEY"
+        }
+    ],
+    "outputs": [
+        {
+            "type": "Artifacts",
+            "inclusion" : "always"
+        }
+    ],
+    "execution": {
+        "type": "JenkinsDocker",
+        "shell": "#!/bin/bash
+set +x
+set +e 
+export INIT_START_TIME=$(date +\"%s\")
+
+export USER_ID=#TEST_ID#
+        
+. $EXT_DIR/_init.sh
+INIT_END_TIME=$(date +\"%s\")
+INIT_EST_TIME=$(($INIT_END_TIME-$INIT_START_TIME))
+echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
+/bin/sh ${EXT_DIR}/execute.sh
+
+"
+    }
+    },
+    "project": "https://hub.jazz.net/project/alchemy/Alchemy-Ostanes",
+    "project_example": "https://hub.jazz.net/pipeline/Osthanes/blazemeter-static",
+    "project_contact": "elobeto@us.ibm.com"
+}
