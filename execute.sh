@@ -46,15 +46,14 @@ fi
 debugme echo "SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}"
 debugme echo "USER_ID: ${SAUCE_USERNAME}"
 
+#Run tests
 npm install
 
 echo "Starting test"
-npm test > res.txt
-cat res.txt
+unbuffer npm test 2>&1 | tee res.txt
 
 if grep -q "failed" res.txt; then 
     exit 1 
 fi
 
-ruby -v
-gem list
+#Gather results
