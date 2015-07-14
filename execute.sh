@@ -55,3 +55,6 @@ cat res.txt
 if grep -q "failed" res.txt; then 
     exit 1 
 fi
+
+ruby -v
+gem list
