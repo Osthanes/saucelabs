@@ -49,6 +49,9 @@ debugme echo "USER_ID: ${SAUCE_USERNAME}"
 #Run tests
 npm install
 
+#Set start time to retrieve tests since this time
+export EPOCH_TIME=$(date +%s)
+
 echo "Starting test"
 
 npm test
@@ -57,11 +60,5 @@ RESULT=$?
 if [ $RESULT -ne 0 ]; then
     exit 1
 fi
-
-#unbuffer npm test 2>&1 | tee res.txt
-#
-#if grep -q "failed" res.txt; then 
-#    exit 1 
-#fi
 
 #Gather results
