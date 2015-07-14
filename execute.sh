@@ -62,3 +62,4 @@ if [ $RESULT -ne 0 ]; then
 fi
 
 #Gather results
+python sauce.py
