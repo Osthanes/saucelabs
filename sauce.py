@@ -22,7 +22,7 @@ TEST_URL = "https://saucelabs.com/tests/%s"
 SAUCE_URL = "https://saucelabs.com/rest/v1/"
 SAUCE_USER = os.environ.get('SAUCE_USERNAME')
 SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
-START_TIME = os.environ.get('EPOCH_TIME')
+START_TIME = os.environ.get('INIT_END_TIME')
 
 def request(url):
     base64string = base64.encodestring('%s:%s' % (SAUCE_USER, SAUCE_ACCESS_KEY)).replace('\n', '')

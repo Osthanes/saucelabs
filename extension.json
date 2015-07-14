@@ -59,6 +59,6 @@ fi
     }
     },
     "project": "https://hub.jazz.net/project/alchemy/Alchemy-Ostanes",
-    "project_example": "https://hub.jazz.net/pipeline/Osthanes/blazemeter-static",
+    "project_example": "https://hub.jazz.net/pipeline/Osthanes/blazemeter_static",
     "project_contact": "elobeto@us.ibm.com"
 }
