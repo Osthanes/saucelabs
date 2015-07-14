@@ -50,10 +50,18 @@ debugme echo "USER_ID: ${SAUCE_USERNAME}"
 npm install
 
 echo "Starting test"
-unbuffer npm test 2>&1 | tee res.txt
 
-if grep -q "failed" res.txt; then 
-    exit 1 
+npm test
+RESULT=$?
+
+if [ $RESULT -ne 0 ]; then
+    exit 1
 fi
+
+#unbuffer npm test 2>&1 | tee res.txt
+#
+#if grep -q "failed" res.txt; then 
+#    exit 1 
+#fi
 
 #Gather results
