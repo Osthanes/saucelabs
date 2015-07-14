@@ -46,6 +46,14 @@ RESULT=$?
 if [ $RESULT -ne 0 ]; then
     exit 1
 fi
+    
+${EXT_DIR}/sauce.py
+RESULT=$?
+
+
+if [ $RESULT -ne 0 ]; then
+    exit 1
+fi
 
 "
     }
