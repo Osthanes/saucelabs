@@ -43,7 +43,7 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 /bin/sh ${EXT_DIR}/execute.sh
 RESULT=$?
     
-if [ $RESULT -ne 0]; then
+if [ $RESULT -ne 0 ]; then
     exit 1
 fi
 
