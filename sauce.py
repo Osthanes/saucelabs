@@ -31,7 +31,7 @@ def request(url):
 
 def get_jobs():
     try:
-        response = request(SAUCE_URL + SAUCE_USER + "/jobs")#?from=" + START_TIME)
+        response = request(SAUCE_URL + SAUCE_USER + "/jobs?from=" + START_TIME)
         response.raise_for_status()
         return response
     except requests.exceptions.RequestException as e:
