@@ -49,9 +49,6 @@ debugme echo "USER_ID: ${SAUCE_USERNAME}"
 #Run tests
 npm install
 
-#Set start time to retrieve tests since this time
-export EPOCH_TIME=$(date +%s)
-
 echo "Starting test"
 
 npm test
