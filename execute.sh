@@ -52,4 +52,4 @@ echo "Starting test"
 npm test > res.txt
 cat res.txt
 
-if grep -q "npm err" res.txt && echo "" || exit 1
+if grep -q "failed" res.txt; then echo ""; else exit 1
