@@ -49,4 +49,7 @@ debugme echo "USER_ID: ${SAUCE_USERNAME}"
 npm install
 
 echo "Starting test"
-npm test
+npm test > res.txt
+cat res.txt
+
+if grep -q "npm err" res.txt && echo "" || exit 1
