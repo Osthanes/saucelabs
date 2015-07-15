@@ -51,12 +51,13 @@ def get_job_status(job):
         sys.exit(1)
 
 def output_job(job):
+    global exit_flag
     if get_job_status(job)["consolidated_status"] != "passed":
         print LABEL_RED
         print "There was problem with job %s." % job
         print "See details at: " + TEST_URL % job
         print LABEL_NO_COLOR
-        global exit_flag = 1
+        exit_flag = 1
     else:
         print LABEL_GREEN
         print "Job %s completed successfully." % job
