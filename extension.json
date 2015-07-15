@@ -18,6 +18,14 @@
             "required": "true",
             "default_value": "",
             "label_key": "USER_ID_KEY"
+        },
+        {
+            "name": "APP_NAME",
+            "type": "Text",
+            "required": "false",
+            "default_value": "",
+            "label_key": "APP_NAME_KEY",
+            "label_desc": "APP_DESC_KEY"
         }
     ],
     "outputs": [
@@ -33,6 +41,7 @@ set +x
 set +e 
 export INIT_START_TIME=$(date +\"%s\")
 
+export CF_APP_BOX=#APP_NAME#
 export SAUCE_USERNAME=#USER_ID#
         
 . $EXT_DIR/_init.sh
