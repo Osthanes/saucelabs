@@ -20,9 +20,9 @@ TEST_URL = "https://saucelabs.com/tests/%s"
 
 #environment saucelabs variables
 SAUCE_URL = "https://saucelabs.com/rest/v1/"
-SAUCE_USER = os.environ.get('SAUCE_USERNAME')
-SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
-START_TIME = os.environ.get('INIT_START_TIME')
+SAUCE_USER = "elobeto"#os.environ.get('SAUCE_USERNAME')
+SAUCE_ACCESS_KEY = "a5a54062-2e5e-4c97-852a-59251e38760c"#os.environ.get('SAUCE_ACCESS_KEY')
+START_TIME = "1436904157"#os.environ.get('INIT_START_TIME')
 
 exit_flag = 0
 
@@ -51,10 +51,17 @@ def get_job_status(job):
         sys.exit(1)
 
 def output_job(job):
-    print LABEL_GREEN
-    print "Job %s completed successfully." % job
-    print "See details at: " + TEST_URL % job
-    print LABEL_NO_COLOR
+    if get_job_status(job)["consolidated_status"] != "passed":
+        print LABEL_RED
+        print "There was problem with job %s." % job
+        print "See details at: " + TEST_URL % job
+        print LABEL_NO_COLOR
+        exit_flag = 1
+    else:
+        print LABEL_GREEN
+        print "Job %s completed successfully." % job
+        print "See details at: " + TEST_URL % job
+        print LABEL_NO_COLOR
 
 #Start
 logging.captureWarnings(True)
