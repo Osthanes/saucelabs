@@ -24,6 +24,8 @@ SAUCE_USER = os.environ.get('SAUCE_USERNAME')
 SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
 START_TIME = os.environ.get('INIT_START_TIME')
 
+exit_flag = 0
+
 def request(url):
     base64string = base64.encodestring('%s:%s' % (SAUCE_USER, SAUCE_ACCESS_KEY)).replace('\n', '')
     headers = {'Authorization': 'Basic %s' % base64string}
@@ -34,6 +36,16 @@ def get_jobs():
         response = request(SAUCE_URL + SAUCE_USER + "/jobs?from=" + START_TIME)
         response.raise_for_status()
         return response
+    except requests.exceptions.RequestException as e:
+        print e
+        sys.exit(1)
+        
+def get_job_status(job):
+    try:
+        response = request(SAUCE_URL + SAUCE_USER + "/jobs/" + job)
+        response.raise_for_status()
+        response_json = response.json()
+        return response_json
     except requests.exceptions.RequestException as e:
         print e
         sys.exit(1)
@@ -52,3 +64,6 @@ jobs_json = get_jobs().json()
 #loop through each job in the list and process its assets
 for key in jobs_json:
     output_job(key["id"])
+    
+#exit with appropriate status
+sys.exit(exit_flag)
