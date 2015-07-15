@@ -25,7 +25,7 @@
             "required": "false",
             "default_value": "",
             "label_key": "APP_NAME_KEY",
-            "label_desc": "APP_DESC_KEY"
+            "desc_key": "APP_DESC_KEY"
         }
     ],
     "outputs": [

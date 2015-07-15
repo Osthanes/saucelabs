@@ -135,3 +135,5 @@ if [ ! "$CF_APP_BOX" -z ]; then
 else
     export TEST_URL=cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2
 fi
+
+echo $TEST_URL
