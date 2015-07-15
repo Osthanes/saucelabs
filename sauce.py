@@ -73,4 +73,5 @@ for key in jobs_json:
     output_job(key["id"])
     
 #exit with appropriate status
+print exit_flag
 sys.exit(exit_flag)
