@@ -132,8 +132,10 @@ fi
 ############################################
 if [ ! "$CF_APP_BOX" -z ]; then
     echo "BOX IS FILLED"
-    cf app $CF_APP_BOX | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2
+    export TEST_URL=cf app $CF_APP_BOX | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2
 else
     echo "PULLING FROM ENV VAR"
-    cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2
+    export TEST_URL=cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2
 fi
+
+echo $TEST_URL
