@@ -130,5 +130,6 @@ fi
 ############################################
 # Set app name and test url
 ############################################
-TEST_URL=$(cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2)
+URL=$(cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2)
+TEST_URL="https://$URL"
 export TEST_URL
