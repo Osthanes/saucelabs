@@ -51,9 +51,17 @@ npm install
 
 echo "Starting test"
 
-npm test
-RESULT=$?
-
-if [ $RESULT -ne 0 ]; then
-    exit 1
+#check for gruntfile
+if [ -f Gruntfile.js ]; then
+    grunt test
+    RESULT=?
+    if [ $RESULT -ne 0 ]; then
+        exit 1
+    fi
+else
+    npm test
+    RESULT=$?
+    if [ $RESULT -ne 0 ]; then
+        exit 1
+    fi
 fi
