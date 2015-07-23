@@ -90,6 +90,8 @@ chmod u+x $EXT_DIR/cmd.sh
 . $EXT_DIR/cmd.sh
 #/bin/bash -e #COMMAND#
 RESULT=$?
+        
+echo $RESULT
     
 if [ $RESULT -ne 0 ]; then
 ${EXT_DIR}/sauce.py && exit 1
