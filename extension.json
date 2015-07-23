@@ -88,19 +88,11 @@ npm install
 echo #COMMAND# > cmd.sh
 chmod u+x $EXT_DIR/cmd.sh
 . $EXT_DIR/cmd.sh
-#/bin/bash -e #COMMAND#
 RESULT=$?
-        
-echo $RESULT
     
-if [ $RESULT -ne 0 ]; then
-${EXT_DIR}/sauce.py && exit 1
-else
 ${EXT_DIR}/sauce.py
-RESULT=$?
 if [ $RESULT -ne 0 ]; then
-exit 1
-fi
+    exit 1
 fi
 
 "
