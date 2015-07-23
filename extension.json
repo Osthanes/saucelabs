@@ -27,40 +27,27 @@
             "label_key": "ACCESS_KEY"
         },
         {
-            "name": "COMMAND",
-            "type": "TextArea",
+            "name": "SELECT_CMD",
+            "type": "Select",
             "required": "true",
-            "default_value": "#!/bin/bash
-#Please uncomment the configuration that best fits your test set up
-#or feel free to add your own
-            
-#npm test
-#RESULT=$?
-#if [ $RESULT -ne 0 ]; then
-#exit 1
-#fi
-            
-#grunt test
-#RESULT=$?
-#if [ $RESULT -ne 0 ]; then
-#exit 1
-#fi
-            
-#grunt
-#RESULT=$?
-#if [ $RESULT -ne 0 ]; then
-#exit 1
-#fi
-            
-#Insert custom command:
-            
-#RESULT=$?            
-#if [ $RESULT -ne 0 ]; then
-#exit 1
-#fi",
-            "label_key": "COMMAND_KEY",
-            "desc_key": "COMMAND_DESC"
-        }    
+            "default_value": "ANY",
+            "label_key": "SELECT_CMD_KEY",
+            "desc_key": "SELECT_CMD_DESC",
+            "options": [
+                {
+                    "label_key": "NPM_KEY",
+                    "value": "npm test"
+                },
+                { 
+                    "label_key": "GRUNT_KEY",
+                    "value": "grunt" 
+                },
+                { 
+                    "label_key": "GRUNT_T_KEY",
+                    "value": "grunt test"
+                }
+            ]
+        }
     ],
     "outputs": [
         {
@@ -85,11 +72,9 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
         
 npm install
 
-echo #COMMAND# > cmd.sh
-chmod u+x $EXT_DIR/cmd.sh
-. $EXT_DIR/cmd.sh
-RESULT=$?
-    
+eval #SELECT_CMD#
+RESULT=$?        
+        
 ${EXT_DIR}/sauce.py
 if [ $RESULT -ne 0 ]; then
     exit 1
