@@ -53,10 +53,20 @@ echo "Starting test"
 
 #check for gruntfile
 if [ -f Gruntfile.js ]; then
-    grunt test
-    RESULT=$?
-    if [ $RESULT -ne 0 ]; then
-        exit 1
+    #run grunt test if task is registered
+    if grep -q "grunt.registerTask('test'," Gruntfile.js; then
+        grunt test
+        RESULT=$?
+        if [ $RESULT -ne 0 ]; then
+            exit 1
+        fi
+    else
+    #otherwise run default
+        grunt
+        RESULT=$?
+        if [ $RESULT -ne 0 ]; then
+            exit 1
+        fi
     fi
 else
     npm test
