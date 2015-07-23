@@ -30,7 +30,7 @@
             "name": "COMMAND",
             "type": "TextArea",
             "required": "true",
-            "default_value" : "#!/bin/bash
+            "default_value": "#!/bin/bash
 #Please uncomment the configuration that best fits your test set up
 #or feel free to add your own
             
@@ -57,8 +57,9 @@
 #RESULT=$?            
 #if [ $RESULT -ne 0 ]; then
 #exit 1
-#fi
-"       
+#fi",
+            "label_key": "COMMAND_KEY",
+            "desc_key": "COMMAND_DESC"
         }    
     ],
     "outputs": [
@@ -98,7 +99,6 @@ fi
 fi
 
 "
-    }
     },
     "project": "https://hub.jazz.net/project/alchemy/Alchemy-Ostanes",
     "project_example": "https://hub.jazz.net/pipeline/Osthanes/blazemeter_static",
