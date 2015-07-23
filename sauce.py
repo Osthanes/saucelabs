@@ -58,7 +58,7 @@ def output_job(job):
         print "There was problem with job %s." % job
         print "See details at: " + TEST_URL % job
         print LABEL_NO_COLOR
-        exit_flag = 1
+        #exit_flag = 1
     #job passed
     else:
         print LABEL_GREEN
