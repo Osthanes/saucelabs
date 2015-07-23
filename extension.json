@@ -73,7 +73,7 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 npm install
 
 eval #SELECT_CMD#
-RESULT=$?        
+RESULT=$?
         
 ${EXT_DIR}/sauce.py
 if [ $RESULT -ne 0 ]; then
