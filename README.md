@@ -1,5 +1,5 @@
-# Saucelabs
-## Simple extension to allow exection of Saucelabs tests via the pipeline.
+# Sauce Labs
+## Simple extension to allow exection of Sauce Labs tests via the pipeline.
 
 
 ### Usage:
