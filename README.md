@@ -1,9 +1,8 @@
 # Saucelabs
-Simple extension to allow exection of Saucelabs tests via the pipeline.
-=======================================================================
+## Simple extension to allow exection of Saucelabs tests via the pipeline.
 
-Usage:
-------
+
+### Usage:
 Provide Sauce Labs User Name in the text box provided and enter Sauce Access Key as an enviroment variable in the format "SAUCE_ACCESS_KEY : key"
 
 In order to automatically run tests against the URL generated in the build stage, ensure that tests are configured to pull a URL from environment variables. Add two environment variables CF_APP_NAME with a blank value (delete any pre-filled data) and one with the key that the test code looks for (ie, TEST_URL) with no value as before.
