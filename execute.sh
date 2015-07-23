@@ -47,31 +47,31 @@ debugme echo "SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}"
 debugme echo "USER_ID: ${SAUCE_USERNAME}"
 
 #Run tests
-npm install
-
-echo "Starting test"
-
-#check for gruntfile
-if [ -f Gruntfile.js ]; then
-    #run grunt test if task is registered
-    if grep -q "grunt.registerTask('test'," Gruntfile.js; then
-        grunt test
-        RESULT=$?
-        if [ $RESULT -ne 0 ]; then
-            exit 1
-        fi
-    else
-    #otherwise run default
-        grunt
-        RESULT=$?
-        if [ $RESULT -ne 0 ]; then
-            exit 1
-        fi
-    fi
-else
-    npm test
-    RESULT=$?
-    if [ $RESULT -ne 0 ]; then
-        exit 1
-    fi
-fi
+#npm install
+#
+#echo "Starting test"
+#
+##check for gruntfile
+#if [ -f Gruntfile.js ]; then
+#    #run grunt test if task is registered
+#    if grep -q "grunt.registerTask('test'," Gruntfile.js; then
+#        grunt test
+#        RESULT=$?
+#        if [ $RESULT -ne 0 ]; then
+#            exit 1
+#        fi
+#    else
+#    #otherwise run default
+#        grunt
+#        RESULT=$?
+#        if [ $RESULT -ne 0 ]; then
+#            exit 1
+#        fi
+#    fi
+#else
+#    npm test
+#    RESULT=$?
+#    if [ $RESULT -ne 0 ]; then
+#        exit 1
+#    fi
+#fi
