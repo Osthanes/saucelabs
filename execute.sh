@@ -54,7 +54,7 @@ echo "Starting test"
 #check for gruntfile
 if [ -f Gruntfile.js ]; then
     grunt test
-    RESULT=?
+    RESULT=$?
     if [ $RESULT -ne 0 ]; then
         exit 1
     fi
