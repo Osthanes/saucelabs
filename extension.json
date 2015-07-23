@@ -85,7 +85,10 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
         
 npm install
 
-/bin/bash -e #COMMAND#
+echo #COMMAND# > cmd.sh
+chmod u+x cmd.sh
+./cmd.sh
+#/bin/bash -e #COMMAND#
 RESULT=$?
     
 if [ $RESULT -ne 0 ]; then
