@@ -36,7 +36,7 @@
             "options": [
                 {
                     "label_key": "NPM_KEY",
-                    "value": "npm test"
+                    "value": "npm_test"
                 },
                 { 
                     "label_key": "GRUNT_KEY",
@@ -44,15 +44,15 @@
                 },
                 { 
                     "label_key": "GRUNT_T_KEY",
-                    "value": "grunt test"
+                    "value": "grunt_test"
                 },
                 {
                     "label_key": "ANT_KEY",
-                    "value": "ant test"
+                    "value": "ant_test"
                 },
                 {
                     "label_key": "MVN_KEY",
-                    "value": "mvn test"
+                    "value": "mvn_test"
                 },
                 {
                     "label_key": "CUSTOM_KEY",
@@ -93,7 +93,7 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 
 dropdown_choice=#SELECT_CMD#
 
-if [ "$dropdown_choice" == "npm test" ] || [ "$dropdown_choice" == "grunt test" ] || [ "$dropdown_choice" == "grunt" ]; then
+if [ $dropdown_choice == "npm_test" ] || [ $dropdown_choice == "grunt_test" ] || [ $dropdown_choice == "grunt" ]; then
     npm install
     eval #SELECT_CMD#
     RESULT=$?
@@ -103,7 +103,7 @@ if [ "$dropdown_choice" == "npm test" ] || [ "$dropdown_choice" == "grunt test" 
         exit 1
     fi
 fi
-if [ "$dropdown_choice" == "ant test" ] || [ "$dropdown_choice" == "mvn test" ]; then
+if [ $dropdown_choice == "ant_test" ] || [ $dropdown_choice == "mvn_test" ]; then
     eval #SELECT_CMD#
     RESULT=$?
     ${EXT_DIR}/sauce.py
@@ -112,7 +112,7 @@ if [ "$dropdown_choice" == "ant test" ] || [ "$dropdown_choice" == "mvn test" ];
         exit 1
     fi
 fi
-if [ "$dropdown_choice" == "custom" ]; then
+if [ $dropdown_choice == "custom" ]; then
     /bin/bash -e #COMMAND#
     ${EXT_DIR}/sauce.py
     PY_RES=$?
