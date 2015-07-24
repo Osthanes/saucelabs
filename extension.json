@@ -45,6 +45,18 @@
                 { 
                     "label_key": "GRUNT_T_KEY",
                     "value": "grunt test"
+                },
+                {
+                    "label_key": "ANT_KEY",
+                    "value": "ant test"
+                },
+                {
+                    "label_key": "MVN_KEY",
+                    "value": "mvn test"
+                },
+                {
+                    "label_key": "CUSTOM_KEY",
+                    "value": "custom"
                 }
             ]
         },
@@ -79,18 +91,9 @@ INIT_END_TIME=$(date +\"%s\")
 INIT_EST_TIME=$(($INIT_END_TIME-$INIT_START_TIME))
 echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 
-javaCmd=#COMMAND#
-cmdLen=${#javaCmd}
-if [ $cmdLen -gt 11 ]; then
-    #run java cmd
-    /bin/bash -e #COMMAND#
-    ${EXT_DIR}/sauce.py
-    PY_RES=$?
-    if [$PY_RES -ne 0 ]; then
-        exit 1
-    fi
-elif [ $cmdLen -lt 13 ]; then
-    #node
+dropdown_choice=#SELECT_CMD#
+
+if [ $dropdown_choice == "npm test" ] || [ $dropdown_choice == "grunt test" ] || [ $dropdown_choice == "grunt" ]; then
     npm install
     eval #SELECT_CMD#
     RESULT=$?
@@ -100,7 +103,22 @@ elif [ $cmdLen -lt 13 ]; then
         exit 1
     fi
 fi
-
+if [ $dropdown_choice == "ant test" ] || [ $dropdown_choice == "mvn test" ]; then
+    eval #SELECT_CMD#
+    RESULT=$?
+    ${EXT_DIR}/sauce.py
+    PY_RES=$?
+    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
+        exit 1
+    fi
+fi
+if [ $dropdown_choice == "custom" ]; then
+    /bin/bash -e #COMMAND#
+    ${EXT_DIR}/sauce.py
+    PY_RES=$?
+    if [$PY_RES -ne 0 ]; then
+        exit 1
+    fi
 "
     },
     "project": "https://hub.jazz.net/project/alchemy/Alchemy-Ostanes",
