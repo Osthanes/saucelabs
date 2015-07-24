@@ -89,7 +89,7 @@ if [ $cmdLen -gt 11 ]; then
     if [$PY_RES -ne 0 ]; then
         exit 1
     fi
-else
+elif [ $cmdLen -lt 13 ]; then
     #node
     npm install
     eval #SELECT_CMD#
