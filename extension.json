@@ -92,10 +92,8 @@ INIT_EST_TIME=$(($INIT_END_TIME-$INIT_START_TIME))
 echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 
 dropdown_choice=\"#SELECT_CMD#\"
-echo $dropdown_choice
 
 if [[ $dropdown_choice == \"npm test\" ]] || [[ $dropdown_choice == \"grunt test\" ]] || [[ $dropdown_choice == \"grunt\" ]]; then
-    echo \"found node/grunt\"
     npm install
     eval #SELECT_CMD#
     RESULT=$?
@@ -106,7 +104,6 @@ if [[ $dropdown_choice == \"npm test\" ]] || [[ $dropdown_choice == \"grunt test
     fi
 fi
 if [[ $dropdown_choice == \"ant test\" ]] || [[ $dropdown_choice == \"mvn test\" ]]; then
-    echo \"found java\"
     eval #SELECT_CMD#
     RESULT=$?
     ${EXT_DIR}/sauce.py
@@ -116,7 +113,6 @@ if [[ $dropdown_choice == \"ant test\" ]] || [[ $dropdown_choice == \"mvn test\"
     fi
 fi
 if [[ $dropdown_choice == \"custom\" ]]; then
-    echo \"custom command...\"
     /bin/bash -e #COMMAND#
     ${EXT_DIR}/sauce.py
     PY_RES=$?
