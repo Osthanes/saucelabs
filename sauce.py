@@ -52,19 +52,24 @@ def get_job_status(job):
 
 def output_job(job):
     global exit_flag
-    #job did not pass (error, failed, etc)
-    if get_job_status(job)["consolidated_status"] != "passed":
+    test_status = get_job_status(job)["consolidated_status"]
+    if test_status == "passed": 
+        print LABEL_GREEN
+        print "Job %s passed successfully." % job
+        print "See details at: " + TEST_URL % job
+        print LABEL_NO_COLOR
+    elif test_status == "complete":
+        print LABEL_GREEN
+        print "Job %s completed successfully." % job
+        print "See details at: " + TEST_URL % job
+        print LABEL_NO_COLOR
+    #job failed
+    else:
         print LABEL_RED
         print "There was problem with job %s." % job
         print "See details at: " + TEST_URL % job
         print LABEL_NO_COLOR
         exit_flag = 1
-    #job passed
-    else:
-        print LABEL_GREEN
-        print "Job %s completed successfully." % job
-        print "See details at: " + TEST_URL % job
-        print LABEL_NO_COLOR
 
 #Start
 logging.captureWarnings(True)

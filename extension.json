@@ -86,6 +86,9 @@ if [ $cmdLen -gt 11 ]; then
     /bin/bash -e #COMMAND#
     ${EXT_DIR}/sauce.py
     PY_RES=$?
+    if [$PY_RES -ne 0 ]; then
+        exit 1
+    fi
 else
     #node
     npm install
