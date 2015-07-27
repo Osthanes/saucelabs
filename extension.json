@@ -96,7 +96,7 @@ tar -xf sc-4.3.10-linux.tar.gz
 cd sc-4.3.10-linux
 bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY &
 cd ..
-sleep 10
+sleep 15
         
 dropdown_choice=\"#SELECT_CMD#\"
 
