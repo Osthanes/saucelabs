@@ -93,7 +93,10 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 
 wget https:\/\/saucelabs.com\/downloads\/sc-4.3.10-linux.tar.gz        
 tar -xf sc-4.3.10-linux.tar.gz
-bin/sc -u SAUCE_USERNAME -k $SAUCE_ACCESS_KEY
+cd sc-4.3.10-linux
+bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY &
+cd ..
+sleep 10
         
 dropdown_choice=\"#SELECT_CMD#\"
 
