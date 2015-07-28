@@ -99,21 +99,21 @@ INIT_END_TIME=$(date +\"%s\")
 INIT_EST_TIME=$(($INIT_END_TIME-$INIT_START_TIME))
 echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 
-sauce_connect=#CONNECT#
-if [[ $sauce_connect == \"true\" ]]; then
-    echo \"Setting up Sauce Connect...\"
-    export HOST=localhost
-    export PORT=4445
-    wget https:\/\/saucelabs.com\/downloads\/sc-4.3.10-linux.tar.gz
-    tar -xf sc-4.3.10-linux.tar.gz
-    cd sc-4.3.10-linux
-    bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY &
-    cd ..
-    sleep 15
-else
+#sauce_connect=#CONNECT#
+#if [[ $sauce_connect == \"true\" ]]; then
+#    echo \"Setting up Sauce Connect...\"
+#    export HOST=localhost
+#    export PORT=4445
+#    wget https:\/\/saucelabs.com\/downloads\/sc-4.3.10-linux.tar.gz
+#   tar -xf sc-4.3.10-linux.tar.gz
+#    cd sc-4.3.10-linux
+#    bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY &
+#    cd ..
+#    sleep 30
+#else
     export HOST=ondemand.saucelabs.com
     export PORT=80
-fi
+#fi
         
 dropdown_choice=\"#SELECT_CMD#\"
 
