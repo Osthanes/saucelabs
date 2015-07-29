@@ -46,32 +46,32 @@ fi
 debugme echo "SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}"
 debugme echo "USER_ID: ${SAUCE_USERNAME}"
 
-#Run tests
-#npm install
-#
-#echo "Starting test"
-#
-##check for gruntfile
-#if [ -f Gruntfile.js ]; then
-#    #run grunt test if task is registered
-#    if grep -q "grunt.registerTask('test'," Gruntfile.js; then
-#        grunt test
-#        RESULT=$?
-#        if [ $RESULT -ne 0 ]; then
-#            exit 1
-#        fi
-#    else
-#    #otherwise run default
-#        grunt
-#        RESULT=$?
-#        if [ $RESULT -ne 0 ]; then
-#            exit 1
-#        fi
-#    fi
-#else
-#    npm test
-#    RESULT=$?
-#    if [ $RESULT -ne 0 ]; then
-#        exit 1
-#    fi
-#fi
+dropdown_choice=$DROPDOWN_CHOICE
+
+if [[ $dropdown_choice == "npm test" ]] || [[ $dropdown_choice == "grunt test" ]] || [[ $dropdown_choice == "grunt" ]]; then
+    npm install
+    eval $DROPDOWN_CHOICE
+    RESULT=$?
+    ${EXT_DIR}/sauce.py
+    PY_RES=$?
+    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
+        exit 1
+    fi
+fi
+if [[ $dropdown_choice == "ant test" ]] || [[ $dropdown_choice == "mvn test" ]]; then
+    eval $DROPDOWN_CHOICE
+    RESULT=$?
+    ${EXT_DIR}/sauce.py
+    PY_RES=$?
+    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
+        exit 1
+    fi
+fi
+if [[ $dropdown_choice == "custom" ]]; then
+    /bin/bash -e $CUSTOM_CMD
+    ${EXT_DIR}/sauce.py
+    PY_RES=$?
+    if [ $PY_RES -ne 0 ]; then
+        exit 1
+    fi
+fi

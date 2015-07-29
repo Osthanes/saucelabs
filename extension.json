@@ -79,41 +79,16 @@ export INIT_START_TIME=$(date +\"%s\")
 
 export SAUCE_USERNAME=#USER_ID#
 export SAUCE_ACCESS_KEY=#ACCESS#
+export DROPDOWN_CHOICE=#SELECT_CMD#
+export CUSTOM_CMD=#COMMAND#
         
 . $EXT_DIR/_init.sh
 INIT_END_TIME=$(date +\"%s\")
 INIT_EST_TIME=$(($INIT_END_TIME-$INIT_START_TIME))
 echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
         
-dropdown_choice=\"#SELECT_CMD#\"
-
-if [[ $dropdown_choice == \"npm test\" ]] || [[ $dropdown_choice == \"grunt test\" ]] || [[ $dropdown_choice == \"grunt\" ]]; then
-    npm install
-    eval #SELECT_CMD#
-    RESULT=$?
-    ${EXT_DIR}/sauce.py
-    PY_RES=$?
-    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
-        exit 1
-    fi
-fi
-if [[ $dropdown_choice == \"ant test\" ]] || [[ $dropdown_choice == \"mvn test\" ]]; then
-    eval #SELECT_CMD#
-    RESULT=$?
-    ${EXT_DIR}/sauce.py
-    PY_RES=$?
-    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
-        exit 1
-    fi
-fi
-if [[ $dropdown_choice == \"custom\" ]]; then
-    /bin/bash -e #COMMAND#
-    ${EXT_DIR}/sauce.py
-    PY_RES=$?
-    if [ $PY_RES -ne 0 ]; then
-        exit 1
-    fi
-fi
+/bin/sh ${EXT_DIR}/execute.sh
+        
 "
     },
     "project": "https://hub.jazz.net/project/alchemy/Alchemy-Ostanes",
