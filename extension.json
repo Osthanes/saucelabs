@@ -89,7 +89,7 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
         
 . $EXT_DIR/execute.sh
 RESULT=$?
-if [ $RESULT -ne 0 ]
+if [ $RESULT -ne 0 ]; then
     exit 1
 fi
         
