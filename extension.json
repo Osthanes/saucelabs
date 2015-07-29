@@ -79,7 +79,7 @@ export INIT_START_TIME=$(date +\"%s\")
 
 export SAUCE_USERNAME=#USER_ID#
 export SAUCE_ACCESS_KEY=#ACCESS#
-export DROPDOWN_CHOICE=#SELECT_CMD#
+export DROPDOWN_CHOICE=\"#SELECT_CMD#\"
 export CUSTOM_CMD=#COMMAND#
         
 . $EXT_DIR/_init.sh
