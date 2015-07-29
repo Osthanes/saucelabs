@@ -68,6 +68,10 @@
         {
             "type": "Artifacts",
             "inclusion" : "always"
+        },
+        {
+            "type": "Tests",
+            "inclusion": "optional"
         }
     ],
     "execution": {
