@@ -11,14 +11,16 @@
             "type": "Text",
             "required": "true",
             "default_value": "",
-            "label_key": "USER_ID_KEY"
+            "label_key": "USER_ID_KEY",
+            "desc_key": "USER_ID_DESC"
         },
         {
             "name": "ACCESS",
             "type": "Text",
             "required": "true",
             "default_value": "",
-            "label_key": "ACCESS_KEY"
+            "label_key": "ACCESS_KEY",
+            "desc_key": "ACCESS_KEY_DESC"
         },
         {
             "name": "SELECT_CMD",
