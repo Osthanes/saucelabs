@@ -46,32 +46,31 @@ fi
 debugme echo "SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}"
 debugme echo "USER_ID: ${SAUCE_USERNAME}"
 
-dropdown_choice=$DROPDOWN_CHOICE
+cmd_choice=$CMD_CHOICE
 
-if [[ $dropdown_choice == "npm test" ]] || [[ $dropdown_choice == "grunt test" ]] || [[ $dropdown_choice == "grunt" ]]; then
+function execute { 
+    eval $CMD_CHOICE
+    RESULT=$?
+    ${EXT_DIR}/sauce.py
+    PY_RES=$?
+    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
+        exit 1
+    fi
+}
+
+if [[ $cmd_choice == "npm test" ]] || [[ $cmd_choice == "grunt test" ]] || [[ $cmd_choice == "grunt" ]]; then
     npm install
-    eval $DROPDOWN_CHOICE
-    RESULT=$?
-    ${EXT_DIR}/sauce.py
-    PY_RES=$?
-    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
-        exit 1
-    fi
+    execute
 fi
-if [[ $dropdown_choice == "ant test" ]] || [[ $dropdown_choice == "mvn test" ]]; then
-    eval $DROPDOWN_CHOICE
-    RESULT=$?
-    ${EXT_DIR}/sauce.py
-    PY_RES=$?
-    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
-        exit 1
-    fi
+if [[ $cmd_choice == "ant test" ]] || [[ $cmd_choice == "mvn test" ]]; then
+    execute
 fi
-if [[ $dropdown_choice == "custom" ]]; then
+if [[ $cmd_choice == "custom" ]]; then
     eval $CUSTOM_CMD
+    RESULT=$?
     ${EXT_DIR}/sauce.py
     PY_RES=$?
-    if [ $PY_RES -ne 0 ]; then
+    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
         exit 1
     fi
 fi

@@ -85,7 +85,7 @@ export INIT_START_TIME=$(date +\"%s\")
 
 export SAUCE_USERNAME=#USER_ID#
 export SAUCE_ACCESS_KEY=#ACCESS#
-export DROPDOWN_CHOICE=\"#SELECT_CMD#\"
+export CMD_CHOICE=\"#SELECT_CMD#\"
 export CUSTOM_CMD=\"#COMMAND#\"
         
 . $EXT_DIR/_init.sh
@@ -95,6 +95,10 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
         
 . $EXT_DIR/execute.sh
 RESULT=$?
+        
+mv selenium-server* $ARCHIVE_DIR
+mv video* $ARCHIVE_DIR
+        
 if [ $RESULT -ne 0 ]; then
     exit 1
 fi
