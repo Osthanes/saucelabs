@@ -68,7 +68,7 @@ if [[ $dropdown_choice == "ant test" ]] || [[ $dropdown_choice == "mvn test" ]];
     fi
 fi
 if [[ $dropdown_choice == "custom" ]]; then
-    /bin/bash -e $CUSTOM_CMD
+    eval $CUSTOM_CMD
     ${EXT_DIR}/sauce.py
     PY_RES=$?
     if [ $PY_RES -ne 0 ]; then
