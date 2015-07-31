@@ -130,7 +130,7 @@ fi
 #############################################
 # Set app name and test url
 #############################################
-URL=$(cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2)
+cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2
 echo $CF_APP_NAME
 echo $URL
 if [ -z "$URL" ]; then
