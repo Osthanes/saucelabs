@@ -53,7 +53,7 @@ function execute {
     RESULT=$?
     ${EXT_DIR}/sauce.py
     PY_RES=$?
-    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
+    if [ $RESULT -ne 0 ] || [ $PY_RES -ne 0 ]; then
         exit 1
     fi
 }
@@ -67,10 +67,4 @@ if [[ $cmd_choice == "ant test" ]] || [[ $cmd_choice == "mvn test" ]]; then
 fi
 if [[ $cmd_choice == "custom" ]]; then
     custom_cmd
-    RESULT=$?
-    ${EXT_DIR}/sauce.py
-    PY_RES=$?
-    if [ $RESULT -ne 0 ] || [ $PY_RES -ne 0 ]; then
-        exit 1
-    fi
 fi
