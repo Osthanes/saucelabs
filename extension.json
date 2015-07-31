@@ -5,6 +5,12 @@
     "desc_key": "ExtDesc",
     "extension_type": "Test",
     "message_key": "ExtMessage",
+    "inputs": [
+        {
+            "type": "Bluemix",
+            "inclusion" : "always"
+        }
+    ],
     "params": [
         {
             "name": "USER_ID",
@@ -48,7 +54,7 @@
                 },
                 {
                     "label_key": "MVN_KEY",
-                    "value": "mvn test"
+                    "value": "mvn -B test"
                 },
                 {
                     "label_key": "CUSTOM_KEY",
