@@ -127,10 +127,11 @@ if [[ $DEBUG -eq 1 ]]; then
     diff $EXT_DIR/pkglist $EXT_DIR/pkglist2
 fi
 
-############################################
+#############################################
 # Set app name and test url
-############################################
+#############################################
 URL=$(cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2)
+echo $URL
 if [ -z "$URL" ]; then
     #do nothing
     echo "No app name to pull"
