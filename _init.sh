@@ -133,7 +133,7 @@ fi
 URL=$(cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2)
 if [ -z "$URL" ]; then
     #do nothing
-    echo ""
+    echo "No app name to pull"
 else
     TEST_URL="https://$URL"
     export TEST_URL
