@@ -89,7 +89,7 @@ export CMD_CHOICE=\"#SELECT_CMD#\"
 
 function custom_cmd {
         #COMMAND#
-    }
+}
     
 export -f custom_cmd
         
