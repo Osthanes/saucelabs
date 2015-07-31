@@ -70,7 +70,7 @@ if [[ $cmd_choice == "custom" ]]; then
     RESULT=$?
     ${EXT_DIR}/sauce.py
     PY_RES=$?
-    if [ $RESULT -ne 0 ] || [$PY_RES -ne 0 ]; then
+    if [ $RESULT -ne 0 ] || [ $PY_RES -ne 0 ]; then
         exit 1
     fi
 fi
