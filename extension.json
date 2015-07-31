@@ -48,7 +48,7 @@
                 },
                 {
                     "label_key": "MVN_KEY",
-                    "value": "mvn -B test"
+                    "value": "mvn test"
                 },
                 {
                     "label_key": "CUSTOM_KEY",
