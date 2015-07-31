@@ -113,8 +113,11 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 . $EXT_DIR/execute.sh
 RESULT=$?
         
-mv selenium-server* $ARCHIVE_DIR
-mv video* $ARCHIVE_DIR
+zip selenium-server* selenium-server-logs.zip
+zip video-* videos.zip
+
+mv selenium-server-logs.zip $ARCHIVE_DIR
+mv videos.zip $ARCHIVE_DIR
         
 if [ $RESULT -ne 0 ]; then
     exit 1
