@@ -88,7 +88,13 @@ export SAUCE_ACCESS_KEY=#ACCESS#
 export CMD_CHOICE=\"#SELECT_CMD#\"
 
 function custom_cmd {
-        #COMMAND#
+    eval #COMMAND#
+    RESULT=$?
+    ${EXT_DIR}/sauce.py
+    PY_RES=$?
+    if [ $RESULT -ne 0 ] || [ $PY_RES -ne 0 ]; then
+        exit 1
+    fi
 }
     
 export -f custom_cmd
