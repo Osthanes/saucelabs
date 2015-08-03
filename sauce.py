@@ -14,6 +14,7 @@ LABEL_GREEN = '\033[0;32m'
 LABEL_RED = '\033[0;31m'
 LABEL_COLOR = '\033[0;33m'
 LABEL_NO_COLOR = '\033[0m'
+STARS = "**********************************************************************"
 
 #test result url
 TEST_URL = "https://saucelabs.com/tests/%s"
@@ -22,11 +23,24 @@ TEST_URL = "https://saucelabs.com/tests/%s"
 SAUCE_URL = "https://saucelabs.com/rest/v1/"
 SAUCE_USER = os.environ.get('SAUCE_USERNAME')
 SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
-START_TIME = os.environ.get('INIT_START_TIME')
+START_TIME = "1438368120"#os.environ.get('INIT_START_TIME')
 
 chunk_size = 1024
 
 exit_flag = 0
+
+#browser test stat vars
+FIREFOX_PASS = 0
+FIREFOX_TOTAL = 0
+
+CHROME_PASS = 0
+CHROME_TOTAL = 0
+
+IE_PASS = 0
+IE_TOTAL = 0
+
+SAFARI_PASS = 0
+SAFARI_TOTAL = 0
 
 def request(url):
     base64string = base64.encodestring('%s:%s' % (SAUCE_USER, SAUCE_ACCESS_KEY)).replace('\n', '')
@@ -70,10 +84,10 @@ def get_job_status(job):
         
 def get_job_assets(job):
     try:
-        print "Getting selenium log for " + job
+        LOGGER.info("Getting selenium log for job: " + job)
         download_log(SAUCE_URL + SAUCE_USER + "/jobs/" + job + "/assets/selenium-server.log", job)
         
-        print "Getting video for " + job
+        LOGGER.info("Getting video for job: " + job)
         download_video(SAUCE_URL + SAUCE_USER + "/jobs/" + job + "/assets/video.flv", job)
     except requests.exceptions.RequestException as e:
         print e
@@ -81,39 +95,132 @@ def get_job_assets(job):
         
 def output_job(job):
     global exit_flag
-    test_status = get_job_status(job)["consolidated_status"]
+    
+    test_info = get_job_status(job)
+    
+    browser = test_info["browser"]
+    
+    test_status = test_info["consolidated_status"]
     if test_status == "passed": 
         print LABEL_GREEN
-        print "Job %s passed successfully." % job
-        print "See details at: " + TEST_URL % job
+        LOGGER.info("Job %s passed successfully." % job)
+        LOGGER.info("See details at: " + TEST_URL % job)
         print LABEL_NO_COLOR
+        analyze_browser_results(0, browser)
     elif test_status == "complete":
         print LABEL_GREEN
-        print "Job %s completed successfully." % job
-        print "See details at: " + TEST_URL % job
+        LOGGER.info("Job %s completed successfully." % job)
+        LOGGER.info("See details at: " + TEST_URL % job)
         print LABEL_NO_COLOR
+        analyze_browser_results(0, browser)
     #job failed
     else:
         print LABEL_RED
-        print "There was problem with job %s." % job
-        print "See details at: " + TEST_URL % job
+        LOGGER.info("There was problem with job %s." % job)
+        LOGGER.info("See details at: " + TEST_URL % job)
         print LABEL_NO_COLOR
+        analyze_browser_results(1, browser)
         exit_flag = 1
     
     #download selenium log
-    get_job_assets(job)
+    #get_job_assets(job)
     
+def analyze_browser_results(status, browser):
+    global FIREFOX_PASS
+    global FIREFOX_TOTAL
+
+    global CHROME_PASS
+    global CHROME_TOTAL
+
+    global IE_PASS
+    global IE_TOTAL
+    
+    global SAFARI_PASS
+    global SAFARI_TOTAL
+    
+    if browser == "firefox":
+        if status == 0:
+            FIREFOX_PASS += 1
+        FIREFOX_TOTAL += 1
+        
+    if browser == "googlechrome":
+        if status == 0:
+            CHROME_PASS += 1
+        CHROME_TOTAL += 1
+        
+    if browser == "iexplore":
+        if status == 0:
+            IE_PASS += 1
+        IE_TOTAL += 1
+        
+    if browser == "safari":
+        if status == 0:
+            SAFARI_PASS += 1
+        SAFARI_TOTAL += 1
+    
+def setup_logging():
+    logger = logging.getLogger('pipeline')
+    logger.setLevel(logging.INFO)
+
+    # if logmet is enabled, send the log through syslog as well
+    if os.environ.get('LOGMET_LOGGING_ENABLED'):
+        handler = logging.handlers.SysLogHandler(address='/dev/log')
+        logger.addHandler(handler)
+        # don't send debug info through syslog
+        handler.setLevel(logging.INFO)
+
+    # in any case, dump logging to the screen
+    handler = logging.StreamHandler(sys.stdout)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+
+    handler.setLevel(logging.INFO)
+    logger.addHandler(handler)
+
+    return logger
 
 #Start
 logging.captureWarnings(True)
+LOGGER = setup_logging()
 
-print "Getting jobs..."
+LOGGER.info("Getting jobs...")
 jobs_json = get_jobs().json()
 
 #loop through each job in the list and process its assets
-print "Processing jobs..."
+LOGGER.info("Processing jobs...")
 for key in jobs_json:
     output_job(key["id"])
+    
+#log test results
+print STARS
+print LABEL_GREEN
+LOGGER.info('%d out of %d tests passed on Firefox.' % (FIREFOX_PASS, FIREFOX_TOTAL))
+print LABEL_RED
+LOGGER.info('%d tests failed.' % (FIREFOX_TOTAL - FIREFOX_PASS))
+print LABEL_NO_COLOR
+
+print STARS
+print LABEL_GREEN
+LOGGER.info('%d out of %d tests passed on Google Chrome.' % (CHROME_PASS, CHROME_TOTAL))
+print LABEL_RED
+LOGGER.info('%d tests failed.' % (CHROME_TOTAL - CHROME_PASS))
+print LABEL_NO_COLOR
+
+
+print STARS
+print LABEL_GREEN
+LOGGER.info('%d out of %d tests passed on Internet Explorer.' % (IE_PASS, IE_TOTAL))
+print LABEL_RED
+LOGGER.info('%d tests failed.' % (IE_TOTAL - IE_PASS))
+print LABEL_NO_COLOR
+
+print STARS
+print LABEL_GREEN
+LOGGER.info('%d out of %d tests passed on Safari.' % (SAFARI_PASS, SAFARI_TOTAL))
+print LABEL_RED
+LOGGER.info('%d tests failed.' % (SAFARI_TOTAL - SAFARI_PASS))
+print LABEL_NO_COLOR
+print STARS
     
 #exit with appropriate status
 sys.exit(exit_flag)
