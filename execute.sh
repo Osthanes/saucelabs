@@ -54,10 +54,10 @@ function execute {
     ${EXT_DIR}/sauce.py
     PY_RES=$?
     
-    zip selenium_logs.zip selenium-server-*
-    zip videos.zip video-*
-    mv selenium_logs.zip ${ARCHIVE_DIR}
-    mv videos.zip ${ARCHIVE_DIR}
+    #zip selenium_logs.zip selenium-server-*
+    #zip videos.zip video-*
+    mv selenium* ${ARCHIVE_DIR}
+    mv video* ${ARCHIVE_DIR}
     
     if [ $RESULT -ne 0 ] || [ $PY_RES -ne 0 ]; then
         exit 1
