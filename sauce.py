@@ -123,7 +123,7 @@ def output_job(job):
         exit_flag = 1
     
     #download selenium log
-    #get_job_assets(job)
+    get_job_assets(job)
     
 def analyze_browser_results(status, browser):
     global FIREFOX_PASS
