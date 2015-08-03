@@ -23,7 +23,7 @@ TEST_URL = "https://saucelabs.com/tests/%s"
 SAUCE_URL = "https://saucelabs.com/rest/v1/"
 SAUCE_USER = os.environ.get('SAUCE_USERNAME')
 SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
-START_TIME = "1438368120"#os.environ.get('INIT_START_TIME')
+START_TIME = os.environ.get('INIT_START_TIME')
 
 chunk_size = 1024
 
