@@ -58,6 +58,7 @@ function execute {
     zip videos.zip video-*
     mv selenium_logs.zip ${ARCHIVE_DIR}
     mv videos.zip ${ARCHIVE_DIR}
+    mv browser_info.json ${ARCHIVE_DIR}
     
     if [ $RESULT -ne 0 ] || [ $PY_RES -ne 0 ]; then
         exit 1
