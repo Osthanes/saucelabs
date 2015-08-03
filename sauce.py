@@ -23,7 +23,7 @@ TEST_URL = "https://saucelabs.com/tests/%s"
 SAUCE_URL = "https://saucelabs.com/rest/v1/"
 SAUCE_USER = os.environ.get('SAUCE_USERNAME')
 SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
-START_TIME = os.environ.get('INIT_START_TIME')
+START_TIME = "1438368120"#os.environ.get('INIT_START_TIME')
 
 chunk_size = 1024
 
@@ -123,7 +123,7 @@ def output_job(job):
         exit_flag = 1
     
     #download selenium log
-    get_job_assets(job)
+    #get_job_assets(job)
     
 def analyze_browser_results(status, browser):
     global FIREFOX_PASS
@@ -221,6 +221,13 @@ print LABEL_RED
 LOGGER.info('%d tests failed.' % (SAFARI_TOTAL - SAFARI_PASS))
 print LABEL_NO_COLOR
 print STARS
-    
+
+#log json of browser test results
+browser_info = '["firefox", {"total": "%d","passed": "%d", "failed": "%d"}, "chrome", {"total": "%d", "passed": "%d", "failed": "%d"}, "iexplore", {"total": "%d", "passed": "%d", "failed": "%d"}, "safari", {"total": "%d", "passed": "%d", "failed": "%d"}]' % (FIREFOX_TOTAL, FIREFOX_PASS, FIREFOX_TOTAL - FIREFOX_PASS, CHROME_TOTAL, CHROME_PASS, CHROME_TOTAL - CHROME_PASS, IE_TOTAL, IE_PASS, IE_TOTAL - IE_PASS, SAFARI_TOTAL, SAFARI_PASS, SAFARI_TOTAL - SAFARI_PASS)
+
+browser_json = json.loads(browser_info)
+with open('browser_info.json', 'w') as outfile:
+    json.dump(browser_json, outfile, sort_keys = True, indent = 4, ensure_ascii=False)
+
 #exit with appropriate status
 sys.exit(exit_flag)
