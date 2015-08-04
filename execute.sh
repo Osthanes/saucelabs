@@ -54,8 +54,8 @@ function execute {
     ${EXT_DIR}/sauce.py
     PY_RES=$?
     
-    zip selenium_logs.zip selenium-server-*
-    zip videos.zip video-*
+    zip -q selenium_logs.zip selenium-server-*
+    zip -q videos.zip video-*
     mv selenium_logs.zip ${ARCHIVE_DIR}
     mv videos.zip ${ARCHIVE_DIR}
     mv browser_info.json ${ARCHIVE_DIR}
