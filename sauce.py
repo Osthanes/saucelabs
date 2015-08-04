@@ -203,7 +203,7 @@ print LABEL_NO_COLOR
 print STARS
 print LABEL_GREEN
 print '%d out of %d tests passed on Google Chrome.' % (CHROME_PASS, CHROME_TOTAL)
-if CHROME_TOTAL - CHROME_PASS > 0
+if CHROME_TOTAL - CHROME_PASS > 0:
     print LABEL_RED
     print '%d tests failed.' % (CHROME_TOTAL - CHROME_PASS)
 print LABEL_NO_COLOR
@@ -212,7 +212,7 @@ print LABEL_NO_COLOR
 print STARS
 print LABEL_GREEN
 print '%d out of %d tests passed on Internet Explorer.' % (IE_PASS, IE_TOTAL)
-if IE_TOTAL - IE_PASS > 0
+if IE_TOTAL - IE_PASS > 0:
     print LABEL_RED
     print '%d tests failed.' % (IE_TOTAL - IE_PASS)
 print LABEL_NO_COLOR
@@ -220,7 +220,7 @@ print LABEL_NO_COLOR
 print STARS
 print LABEL_GREEN
 print '%d out of %d tests passed on Safari.' % (SAFARI_PASS, SAFARI_TOTAL)
-if SAFARI_TOTAL - SAFARI_PASS > 0
+if SAFARI_TOTAL - SAFARI_PASS > 0:
     print LABEL_RED
     print '%d tests failed.' % (SAFARI_TOTAL - SAFARI_PASS)
 print LABEL_NO_COLOR
