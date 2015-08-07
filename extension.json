@@ -24,7 +24,7 @@
             "name": "ACCESS",
             "type": "Secure",
             "required": "true",
-            "default_value": "",
+            "default_value": "Your API Key Here",
             "label_key": "ACCESS_KEY",
             "desc_key": "ACCESS_KEY_DESC"
         },
