@@ -227,7 +227,7 @@ print LABEL_NO_COLOR
 print STARS
 
 #log json of browser test results
-browser_info = '["firefox", {"total": "%d","passed": "%d", "failed": "%d"}, "chrome", {"total": "%d", "passed": "%d", "failed": "%d"}, "iexplore", {"total": "%d", "passed": "%d", "failed": "%d"}, "safari", {"total": "%d", "passed": "%d", "failed": "%d"}]' % (FIREFOX_TOTAL, FIREFOX_PASS, FIREFOX_TOTAL - FIREFOX_PASS, CHROME_TOTAL, CHROME_PASS, CHROME_TOTAL - CHROME_PASS, IE_TOTAL, IE_PASS, IE_TOTAL - IE_PASS, SAFARI_TOTAL, SAFARI_PASS, SAFARI_TOTAL - SAFARI_PASS)
+browser_info = '["firefox", {"total": "%d","passed_num": "%d", "failed_num": "%d"}, "chrome", {"total": "%d", "passed_num": "%d", "failed_num": "%d"}, "iexplore", {"total": "%d", "passed_num": "%d", "failed_num": "%d"}, "safari", {"total": "%d", "passed_num": "%d", "failed_num": "%d"}]' % (FIREFOX_TOTAL, FIREFOX_PASS, FIREFOX_TOTAL - FIREFOX_PASS, CHROME_TOTAL, CHROME_PASS, CHROME_TOTAL - CHROME_PASS, IE_TOTAL, IE_PASS, IE_TOTAL - IE_PASS, SAFARI_TOTAL, SAFARI_PASS, SAFARI_TOTAL - SAFARI_PASS)
 
 browser_json = json.loads(browser_info)
 with open('browser_info.json', 'w') as outfile:
