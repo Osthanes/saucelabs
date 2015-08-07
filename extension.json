@@ -22,9 +22,9 @@
         },
         {
             "name": "ACCESS",
-            "type": "Secure",
+            "type": "Text",
             "required": "true",
-            "default_value": "Your API Key Here",
+            "default_value": "",
             "label_key": "ACCESS_KEY",
             "desc_key": "ACCESS_KEY_DESC"
         },
