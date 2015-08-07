@@ -8,6 +8,7 @@ import os
 import base64
 import urllib2
 import logging
+from prettytable import PrettyTable
 
 #ascii color codes for output
 LABEL_GREEN = '\033[0;32m'
@@ -23,7 +24,7 @@ TEST_URL = "https://saucelabs.com/tests/%s"
 SAUCE_URL = "https://saucelabs.com/rest/v1/"
 SAUCE_USER = os.environ.get('SAUCE_USERNAME')
 SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
-START_TIME = os.environ.get('INIT_START_TIME')
+START_TIME = "1438687380"#os.environ.get('INIT_START_TIME')
 
 chunk_size = 1024
 
@@ -126,7 +127,7 @@ def output_job(job):
         exit_flag = 1
     
     #download assets
-    get_job_assets(job)
+    #get_job_assets(job)
     
 def append_job_json(job_json):
     with open(JOB_DATA, 'a') as fd:
@@ -208,38 +209,17 @@ with open(JOB_DATA, 'a') as fd:
     fd.close()    
     
 #log test results
-print STARS
 print LABEL_GREEN
-print '%d out of %d tests passed on Firefox.' % (FIREFOX_PASS, FIREFOX_TOTAL)
-if FIREFOX_TOTAL - FIREFOX_PASS > 0:
-    print LABEL_RED
-    print '%d tests failed.' % (FIREFOX_TOTAL - FIREFOX_PASS)
-print LABEL_NO_COLOR
-
 print STARS
-print LABEL_GREEN
-print '%d out of %d tests passed on Google Chrome.' % (CHROME_PASS, CHROME_TOTAL)
-if CHROME_TOTAL - CHROME_PASS > 0:
-    print LABEL_RED
-    print '%d tests failed.' % (CHROME_TOTAL - CHROME_PASS)
-print LABEL_NO_COLOR
-
+results_table = PrettyTable(["Browser", "Jobs Succeeded", "Jobs Failed", "Total Jobs"])
+results_table.align["Browser"] = "l"
+results_table.add_row(["Firefox", FIREFOX_PASS, FIREFOX_TOTAL - FIREFOX_PASS, FIREFOX_TOTAL])
+results_table.add_row(["Google Chrome", CHROME_PASS, CHROME_TOTAL - CHROME_PASS, CHROME_TOTAL])
+results_table.add_row(["Internet Explorer", IE_PASS, IE_TOTAL - IE_PASS, IE_TOTAL])
+results_table.add_row(["Safari", SAFARI_PASS, SAFARI_TOTAL - SAFARI_PASS, SAFARI_TOTAL])
+print results_table
 print STARS
-print LABEL_GREEN
-print '%d out of %d tests passed on Internet Explorer.' % (IE_PASS, IE_TOTAL)
-if IE_TOTAL - IE_PASS > 0:
-    print LABEL_RED
-    print '%d tests failed.' % (IE_TOTAL - IE_PASS)
 print LABEL_NO_COLOR
-
-print STARS
-print LABEL_GREEN
-print '%d out of %d tests passed on Safari.' % (SAFARI_PASS, SAFARI_TOTAL)
-if SAFARI_TOTAL - SAFARI_PASS > 0:
-    print LABEL_RED
-    print '%d tests failed.' % (SAFARI_TOTAL - SAFARI_PASS)
-print LABEL_NO_COLOR
-print STARS
 
 #exit with appropriate status
 sys.exit(exit_flag)
