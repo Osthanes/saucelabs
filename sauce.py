@@ -119,8 +119,8 @@ def output_job(job):
     #job failed
     else:
         print LABEL_RED
-        LOGGER.info("There was problem with job %s." % job)
-        LOGGER.info("See details at: " + TEST_URL % job)
+        LOGGER.error("There was problem with job %s." % job)
+        LOGGER.error("See details at: " + TEST_URL % job)
         print LABEL_NO_COLOR
         analyze_browser_results(1, browser)
         exit_flag = 1
