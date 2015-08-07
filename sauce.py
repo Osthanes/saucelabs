@@ -42,6 +42,8 @@ IE_TOTAL = 0
 SAFARI_PASS = 0
 SAFARI_TOTAL = 0
 
+JOB_DATA = "job_data_collection.json"
+
 def request(url):
     base64string = base64.encodestring('%s:%s' % (SAUCE_USER, SAUCE_ACCESS_KEY)).replace('\n', '')
     headers = {'Authorization': 'Basic %s' % base64string}
@@ -77,6 +79,7 @@ def get_job_status(job):
         response = request(SAUCE_URL + SAUCE_USER + "/jobs/" + job)
         response.raise_for_status()
         response_json = response.json()
+        append_job_json(response.content)
         return response_json
     except requests.exceptions.RequestException as e:
         print e
@@ -122,8 +125,13 @@ def output_job(job):
         analyze_browser_results(1, browser)
         exit_flag = 1
     
-    #download selenium log
+    #download assets
     get_job_assets(job)
+    
+def append_job_json(job_json):
+    with open(JOB_DATA, 'a') as fd:
+        fd.write(job_json + ",")
+        fd.close()
     
 def analyze_browser_results(status, browser):
     global FIREFOX_PASS
@@ -187,9 +195,17 @@ LOGGER.info("Getting jobs...")
 jobs_json = get_jobs().json()
 
 #loop through each job in the list and process its assets
+with open(JOB_DATA, 'wb') as fd:
+    fd.write("[")
+    fd.close()
+    
 LOGGER.info("Processing jobs...")
 for key in jobs_json:
     output_job(key["id"])
+    
+with open(JOB_DATA, 'a') as fd:
+    fd.write("{}]")
+    fd.close()    
     
 #log test results
 print STARS
@@ -208,7 +224,6 @@ if CHROME_TOTAL - CHROME_PASS > 0:
     print '%d tests failed.' % (CHROME_TOTAL - CHROME_PASS)
 print LABEL_NO_COLOR
 
-
 print STARS
 print LABEL_GREEN
 print '%d out of %d tests passed on Internet Explorer.' % (IE_PASS, IE_TOTAL)
@@ -225,13 +240,6 @@ if SAFARI_TOTAL - SAFARI_PASS > 0:
     print '%d tests failed.' % (SAFARI_TOTAL - SAFARI_PASS)
 print LABEL_NO_COLOR
 print STARS
-
-#log json of browser test results
-browser_info = '["firefox", {"total": "%d","passed_num": "%d", "failed_num": "%d"}, "chrome", {"total": "%d", "passed_num": "%d", "failed_num": "%d"}, "iexplore", {"total": "%d", "passed_num": "%d", "failed_num": "%d"}, "safari", {"total": "%d", "passed_num": "%d", "failed_num": "%d"}]' % (FIREFOX_TOTAL, FIREFOX_PASS, FIREFOX_TOTAL - FIREFOX_PASS, CHROME_TOTAL, CHROME_PASS, CHROME_TOTAL - CHROME_PASS, IE_TOTAL, IE_PASS, IE_TOTAL - IE_PASS, SAFARI_TOTAL, SAFARI_PASS, SAFARI_TOTAL - SAFARI_PASS)
-
-browser_json = json.loads(browser_info)
-with open('browser_info.json', 'w') as outfile:
-    json.dump(browser_json, outfile, sort_keys = True, indent = 4, ensure_ascii=False)
 
 #exit with appropriate status
 sys.exit(exit_flag)
