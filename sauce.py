@@ -24,7 +24,7 @@ TEST_URL = "https://saucelabs.com/tests/%s"
 SAUCE_URL = "https://saucelabs.com/rest/v1/"
 SAUCE_USER = os.environ.get('SAUCE_USERNAME')
 SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
-START_TIME = "1438687380"#os.environ.get('INIT_START_TIME')
+START_TIME = os.environ.get('INIT_START_TIME')
 
 chunk_size = 1024
 
@@ -127,7 +127,7 @@ def output_job(job):
         exit_flag = 1
     
     #download assets
-    #get_job_assets(job)
+    get_job_assets(job)
     
 def append_job_json(job_json):
     with open(JOB_DATA, 'a') as fd:
