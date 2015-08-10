@@ -26,7 +26,6 @@ SAUCE_USER = os.environ.get('SAUCE_USERNAME')
 SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
 START_TIME = os.environ.get('INIT_START_TIME')
 DOWNLOAD_ASSETS = os.environ.get('DOWNLOAD_ASSETS')
-print DOWNLOAD_ASSETS
 
 chunk_size = 1024
 
