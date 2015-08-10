@@ -129,9 +129,9 @@ INIT_END_TIME=$(date +\"%s\")
 INIT_EST_TIME=$(($INIT_END_TIME-$INIT_START_TIME))
 echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
         
-sudo apt-get install -y python-setuptools
-export PYTHONPATH=$PYTHONPATH:/tmp
-easy_install --install-dir=/tmp prettytable
+#sudo apt-get install -y python-setuptools
+#export PYTHONPATH=$PYTHONPATH:/tmp
+#easy_install --install-dir=/tmp prettytable
 
 . $EXT_DIR/execute.sh
 RESULT=$?
