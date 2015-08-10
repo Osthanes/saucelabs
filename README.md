@@ -3,9 +3,9 @@
 
 
 ### Usage:
-Provide Sauce Labs User Name and Access Key in the text boxes provided and indicate whether Sauce Connect will need to be set up. This only applies if the project does not use the npm module `sauce-connect-launcher`.
+Provide Sauce Labs User Name and Access Key in the text boxes provided.
 
-In order to automatically run tests against the URL generated in the build stage, ensure that tests are configured to pull a URL from environment variables(namely `TEST_URL`). Add two environment variables `CF_APP_NAME` with a blank value (delete any pre-filled data) and one with the key `TEST_URL` with no value as before. This will the be the URL of the deployed app that the tests will run against.
+In order to automatically run tests against the URL generated in the deploy stage, ensure that tests are configured to pull a URL from environment variables(namely `TEST_URL`). Add two environment variables `CF_APP_NAME` with a blank value (delete any pre-filled data) and one with the key `TEST_URL` with no value as before. This will the be the URL of the deployed app that the tests will run against.
 
 Declare the following environment properties for the stage: `HOST` and `PORT`. These variables will be set in response to the use of Sauce Connect. Ensure that tests are configured to read from these variables and are not hardcoded.
 
