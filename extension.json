@@ -100,7 +100,7 @@ export INIT_START_TIME=$(date +\"%s\")
 export SAUCE_USERNAME=#USER_ID#
 export SAUCE_ACCESS_KEY=#ACCESS#
 export CMD_CHOICE=\"#SELECT_CMD#\"
-export DOWNLOAD_ASSESS=#DL_ASSETS#
+export DOWNLOAD_ASSETS=#DL_ASSETS#
 
 function custom_cmd {
     eval #COMMAND#
@@ -132,6 +132,9 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 #sudo apt-get install -y python-setuptools
 #export PYTHONPATH=$PYTHONPATH:/tmp
 #easy_install --install-dir=/tmp prettytable
+
+echo \"Download Assets: \"
+echo $DOWNLOAD_ASSETS
 
 . $EXT_DIR/execute.sh
 RESULT=$?

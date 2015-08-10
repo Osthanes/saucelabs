@@ -248,7 +248,6 @@ if IE_TOTAL - IE_PASS > 0:
     print '%d tests failed.' % (IE_TOTAL - IE_PASS)
 print LABEL_NO_COLOR
 
-print results_table
 print STARS
 print LABEL_GREEN
 print '%d out of %d tests passed on Safari.' % (SAFARI_PASS, SAFARI_TOTAL)
