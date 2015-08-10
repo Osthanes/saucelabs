@@ -22,7 +22,7 @@
         },
         {
             "name": "ACCESS",
-            "type": "Text",
+            "type": "Password",
             "required": "true",
             "default_value": "",
             "label_key": "ACCESS_KEY",
