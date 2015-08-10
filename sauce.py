@@ -128,7 +128,7 @@ def output_job(job):
         exit_flag = 1
     
     #download assets
-    if DOWNLOAD_ASSETS:
+    if DOWNLOAD_ASSETS == "true":
         get_job_assets(job)
     
 def append_job_json(job_json):
