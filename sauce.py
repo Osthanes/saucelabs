@@ -8,7 +8,7 @@ import os
 import base64
 import urllib2
 import logging
-from prettytable import PrettyTable
+#from prettytable import PrettyTable
 
 #ascii color codes for output
 LABEL_GREEN = '\033[0;32m'
