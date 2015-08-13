@@ -8,6 +8,8 @@ import os
 import base64
 import urllib2
 import logging
+import hmac
+from hashlib import md5
 #from prettytable import PrettyTable
 
 #ascii color codes for output
@@ -18,7 +20,7 @@ LABEL_NO_COLOR = '\033[0m'
 STARS = "**********************************************************************"
 
 #test result url
-TEST_URL = "https://saucelabs.com/tests/%s"
+TEST_URL = "https://saucelabs.com/jobs/%s?auth=%s"
 
 #environment saucelabs variables
 SAUCE_URL = "https://saucelabs.com/rest/v1/"
@@ -101,6 +103,8 @@ def get_job_assets(job):
 def output_job(job):
     global exit_flag
     
+    auth_key = hmac.new(SAUCE_USER + ":" + SAUCE_ACCESS_KEY, job, md5).hexdigest()
+    
     test_info = get_job_status(job)
     
     browser = test_info["browser"]
@@ -109,20 +113,20 @@ def output_job(job):
     if test_status == "passed": 
         print LABEL_GREEN
         LOGGER.info("Job %s passed successfully." % job)
-        LOGGER.info("See details at: " + TEST_URL % job)
+        LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
         analyze_browser_results(0, browser)
     elif test_status == "complete":
         print LABEL_GREEN
         LOGGER.info("Job %s completed successfully." % job)
-        LOGGER.info("See details at: " + TEST_URL % job)
+        LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
         analyze_browser_results(0, browser)
     #job failed
     else:
         print LABEL_RED
         LOGGER.error("There was problem with job %s." % job)
-        LOGGER.error("See details at: " + TEST_URL % job)
+        LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
         analyze_browser_results(1, browser)
         exit_flag = 1
