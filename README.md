@@ -8,8 +8,6 @@ Provide Sauce Labs User Name and Access Key in the text boxes provided.
 The follwing environment variables will need to be added:
 * `CF_APP_NAME`: The name of the app that will be pulled from the deploy job. Leave empty.
 * `TEST_URL`: The URL of the deployed app that will be set from Cloud Foundry. Ensure the test code is configured to read in this value for the URL and are not hardcoded. Leave empty.
-* `HOST`: The host that the Sauce Labs tests will connect to. Typically `ondemand.saucelabs.com`.
-* `PORT`: The port that Sauce Labs will communicate over. Typically `80`.
 
 In order to automatically run tests against the URL generated in the deploy stage, ensure that tests are configured to pull a URL from the environment variables (namely `TEST_URL`).
 
