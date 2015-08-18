@@ -92,6 +92,7 @@
     "execution": {
         "type": "JenkinsDocker",
         "shell": "#!/bin/bash
+
 set +x
 set +e 
 export INIT_START_TIME=$(date +\"%s\")
@@ -150,12 +151,8 @@ RESULT=$?
 if [ $RESULT -ne 0 ]; then
     exit 1
 fi
-        
-"
-    },
+    "},
     "project": "https://hub.jazz.net/project/alchemy/Alchemy-Ostanes",
     "project_example": "https://hub.jazz.net/pipeline/Osthanes/blazemeter_static",
     "project_contact": "elobeto@us.ibm.com"
-}
-}
 }
