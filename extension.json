@@ -66,8 +66,7 @@
             "name": "COMMAND",
             "type": "TextArea",
             "required": "true",
-            "default_value" : "#!/bin/bash
-",
+            "default_value" : "#!/bin/bash",
             "label_key": "COMMAND_KEY",
             "desc_key": "COMMAND_DESC"
         },
