@@ -105,9 +105,11 @@ export DOWNLOAD_ASSETS=#DL_ASSETS#
 #check for defined host/port, if null set defaults
 if [ -z \"$HOST\" ]; then
     export HOST=ondemand.saucelabs.com
+fi
         
 if [ -z \"$PORT\" ]; then
     export PORT=80
+fi
 
 function custom_cmd {
     eval #COMMAND#
