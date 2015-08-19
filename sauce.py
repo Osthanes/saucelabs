@@ -110,6 +110,7 @@ def output_job(job):
     browser = test_info["browser"]
     
     test_status = test_info["consolidated_status"]
+    print test_status
     if test_status == "passed": 
         print LABEL_GREEN
         LOGGER.info("Job %s passed successfully." % job)
