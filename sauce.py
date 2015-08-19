@@ -230,34 +230,34 @@ with open(JOB_DATA, 'a') as fd:
  #log test results
 print STARS
 print LABEL_GREEN
-print '%d out of %d tests passed on Firefox.' % (FIREFOX_PASS, FIREFOX_TOTAL)
+print '%d out of %d jobs succeeded on Firefox.' % (FIREFOX_PASS, FIREFOX_TOTAL)
 if FIREFOX_TOTAL - FIREFOX_PASS > 0:
     print LABEL_RED
-    print '%d tests failed.' % (FIREFOX_TOTAL - FIREFOX_PASS)
+    print '%d jobs failed.' % (FIREFOX_TOTAL - FIREFOX_PASS)
 print LABEL_NO_COLOR
 
 print STARS
 print LABEL_GREEN
-print '%d out of %d tests passed on Google Chrome.' % (CHROME_PASS, CHROME_TOTAL)
+print '%d out of %d jobs succeeded on Google Chrome.' % (CHROME_PASS, CHROME_TOTAL)
 if CHROME_TOTAL - CHROME_PASS > 0:
     print LABEL_RED
-    print '%d tests failed.' % (CHROME_TOTAL - CHROME_PASS)
+    print '%d jobs failed.' % (CHROME_TOTAL - CHROME_PASS)
 print LABEL_NO_COLOR
 
 print STARS
 print LABEL_GREEN
-print '%d out of %d tests passed on Internet Explorer.' % (IE_PASS, IE_TOTAL)
+print '%d out of %d jobs succeeded on Internet Explorer.' % (IE_PASS, IE_TOTAL)
 if IE_TOTAL - IE_PASS > 0:
     print LABEL_RED
-    print '%d tests failed.' % (IE_TOTAL - IE_PASS)
+    print '%d jobs failed.' % (IE_TOTAL - IE_PASS)
 print LABEL_NO_COLOR
 
 print STARS
 print LABEL_GREEN
-print '%d out of %d tests passed on Safari.' % (SAFARI_PASS, SAFARI_TOTAL)
+print '%d out of %d jobs succeeded on Safari.' % (SAFARI_PASS, SAFARI_TOTAL)
 if SAFARI_TOTAL - SAFARI_PASS > 0:
     print LABEL_RED
-    print '%d tests failed.' % (SAFARI_TOTAL - SAFARI_PASS)
+    print '%d jobs failed.' % (SAFARI_TOTAL - SAFARI_PASS)
 print LABEL_NO_COLOR
 print STARS
 
