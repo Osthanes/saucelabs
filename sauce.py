@@ -14,6 +14,7 @@ from hashlib import md5
 
 #ascii color codes for output
 LABEL_GREEN = '\033[0;32m'
+LABEL_YELLOW = '\033[4;33m'
 LABEL_RED = '\033[0;31m'
 LABEL_COLOR = '\033[0;33m'
 LABEL_NO_COLOR = '\033[0m'
@@ -110,7 +111,6 @@ def output_job(job):
     browser = test_info["browser"]
     
     test_status = test_info["consolidated_status"]
-    print test_status
     if test_status == "passed": 
         print LABEL_GREEN
         LOGGER.info("Job %s passed successfully." % job)
@@ -123,6 +123,12 @@ def output_job(job):
         LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
         analyze_browser_results(0, browser)
+    #for some reason job is still running
+    elif test_status == "in progress":
+        print LABEL_YELLOW
+        LOGGER.info("Job %s is still in progress." % job)
+        LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
+        print LABEL_NO_COLOR
     #job failed
     else:
         print LABEL_RED
