@@ -131,6 +131,9 @@ fi
 # Set app name and test url
 #############################################
 URL=$(cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2)
+if [[ "$URL" =~ ','$ ]]; then
+    URL="${URL%?}"
+fi
 if [ -z "$URL" ]; then
     #do nothing
     echo "No app name to pull..."
