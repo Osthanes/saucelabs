@@ -32,7 +32,7 @@
             "name": "SELECT_CMD",
             "type": "Select",
             "required": "true",
-            "default_value": "ANY",
+            "default_value": "",
             "label_key": "SELECT_CMD_KEY",
             "desc_key": "SELECT_CMD_DESC",
             "options": [
