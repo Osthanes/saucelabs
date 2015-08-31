@@ -31,7 +31,7 @@
         {
             "name": "SELECT_CMD",
             "type": "Select",
-            "required": "true",
+            "required": "false",
             "default_value": " ",
             "label_key": "SELECT_CMD_KEY",
             "desc_key": "SELECT_CMD_DESC",
