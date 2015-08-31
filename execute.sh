@@ -78,3 +78,18 @@ fi
 if [[ $cmd_choice == "custom" ]]; then
     custom_cmd
 fi
+if [[ $cmd_choice == " " ]]; then
+    ${EXT_DIR}/auto-detect.py
+    AUTO_RESULT=$?
+    if [ $AUTO_RESULT -ne 0 ]; then
+        echo "Running grunt test..."
+        cmd_choice="grunt test"
+        npm install
+        execute
+    else
+        echo "Running npm test..."
+        cmd_choice="npm test"
+        npm install
+        execute
+    fi
+fi
