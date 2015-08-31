@@ -32,10 +32,14 @@
             "name": "SELECT_CMD",
             "type": "Select",
             "required": "true",
-            "default_value": "",
+            "default_value": " ",
             "label_key": "SELECT_CMD_KEY",
             "desc_key": "SELECT_CMD_DESC",
             "options": [
+                {
+                    "label_key": "EMPTY_KEY",
+                    "value": " "
+                },
                 {
                     "label_key": "NPM_KEY",
                     "value": "npm test"
