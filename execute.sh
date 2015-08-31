@@ -83,12 +83,12 @@ if [[ $cmd_choice == " " ]]; then
     AUTO_RESULT=$?
     if [ $AUTO_RESULT -ne 0 ]; then
         echo "Running grunt test..."
-        $cmd_choice="grunt test"
+        cmd_choice="grunt test"
         npm install
         execute
     else
         echo "Running npm test..."
-        $cmd_choice="npm test"
+        cmd_choice="npm test"
         npm install
         execute
     fi
