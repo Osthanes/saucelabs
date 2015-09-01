@@ -130,7 +130,8 @@ fi
 #############################################
 # Set app name and test url
 #############################################
-if [ -z "$APP_URL" ]; then
+echo $CF_APP_NAME
+if [ -z "$APP_URL" ] || [ "$APP_URL" == "undefined" ]; then
     URL=$(cf app $CF_APP_NAME | grep 'urls:' | awk '{print $2}' | cut -d '*' -f 2)
     if [[ "$URL" =~ ','$ ]]; then
         URL="${URL%?}"
