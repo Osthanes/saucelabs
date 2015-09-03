@@ -10,4 +10,6 @@ with open("package.json", "r") as f:
 		if pattern.search(line):
 			print "Found npm test script in package.json"
 			exit(0)
+            
+print "Found Gruntfile"
 exit(3)
