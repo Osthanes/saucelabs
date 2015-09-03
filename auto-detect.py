@@ -11,5 +11,4 @@ if os.path.isfile("package.json"):
             if pattern.search(line):
                 print "Found npm test script in package.json"
                 exit(0)
-    print "npm test script not found, running grunt test"
     exit(1)

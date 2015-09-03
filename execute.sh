@@ -78,7 +78,7 @@ fi
 if [[ $cmd_choice == "custom" ]]; then
     custom_cmd
 fi
-if [[ $cmd_choice == " " ]]; then
+if [[ $cmd_choice == " " ]] || [[ -z "$cmd_choice" ]]; then
     ${EXT_DIR}/auto-detect.py
     AUTO_RESULT=$?
     if [ $AUTO_RESULT -ne 0 ]; then
