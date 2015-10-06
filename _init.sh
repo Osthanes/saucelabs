@@ -139,7 +139,7 @@ if [ -z "$APP_URL" ] || [ "$APP_URL" == "undefined" ]; then
     if [ -z "$URL" ]; then
         #do nothing
         echo "No app name to pull..."
-        exit 0
+        #exit 0
     else
         APP_URL="https://$URL"
         export APP_URL
