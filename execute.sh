@@ -46,6 +46,8 @@ fi
 debugme echo "SAUCE_ACCESS_KEY: ${SAUCE_ACCESS_KEY}"
 debugme echo "USER_ID: ${SAUCE_USERNAME}"
 
+ls
+
 cmd_choice=$CMD_CHOICE
 
 function execute { 
