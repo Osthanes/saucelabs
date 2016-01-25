@@ -98,10 +98,10 @@ def get_job_status(job):
 def get_job_assets(job):
     print "getting job assets"
     try:
-        # LOGGER.info("Getting selenium log for job: " + job)
+        LOGGER.info("Getting selenium log for job: " + job)
         download_log(SAUCE_URL + SAUCE_USER + "/jobs/" + job + "/assets/selenium-server.log", job)
         
-        # LOGGER.info("Getting video for job: " + job)
+        LOGGER.info("Getting video for job: " + job)
         download_video(SAUCE_URL + SAUCE_USER + "/jobs/" + job + "/assets/video.flv", job)
     except requests.exceptions.RequestException as e:
         print e
@@ -120,27 +120,27 @@ def output_job(job):
     test_status = test_info["consolidated_status"]
     if test_status == "passed": 
         print LABEL_GREEN
-        # LOGGER.info("Job %s passed successfully." % job)
-        # LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
+        LOGGER.info("Job %s passed successfully." % job)
+        LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
         analyze_browser_results(0, browser)
     elif test_status == "complete":
         print LABEL_GREEN
-        # LOGGER.info("Job %s completed successfully." % job)
-        # LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
+        LOGGER.info("Job %s completed successfully." % job)
+        LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
         analyze_browser_results(0, browser)
     #for some reason job is still running
     elif test_status == "in progress":
         print LABEL_YELLOW
-        # LOGGER.info("Job %s is still in progress." % job)
-        # LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
+        LOGGER.info("Job %s is still in progress." % job)
+        LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
     #job failed
     else:
         print LABEL_RED
- #       LOGGER.error("There was problem with job %s." % job)
-       # LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
+       LOGGER.error("There was problem with job %s." % job)
+       LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
         analyze_browser_results(1, browser)
         exit_flag = 1
@@ -216,7 +216,7 @@ LOGGER = setup_logging()
 print "logger set up"
 
 print "getting jobs"
-#LOGGER.info("Getting jobs...")
+LOGGER.info("Getting jobs...")
 jobs_json = get_jobs().json()
 print "got jobs"
 
