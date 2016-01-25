@@ -50,11 +50,13 @@ SAFARI_TOTAL = 0
 JOB_DATA = "job_data_collection.json"
 
 def request(url):
+    print "basic request"
     base64string = base64.encodestring('%s:%s' % (SAUCE_USER, SAUCE_ACCESS_KEY)).replace('\n', '')
     headers = {'Authorization': 'Basic %s' % base64string}
     return requests.get(url, headers=headers)
 
 def download_log(url, job):
+    print "downloading log"
     base64string = base64.encodestring('%s:%s' % (SAUCE_USER, SAUCE_ACCESS_KEY)).replace('\n', '')
     headers = {'Authorization': 'Basic %s' % base64string}
     r = requests.get(url, headers=headers, stream=True)
@@ -63,6 +65,7 @@ def download_log(url, job):
             fd.write(chunk)
 
 def download_video(url, job):
+    print "downloading video"
     base64string = base64.encodestring('%s:%s' % (SAUCE_USER, SAUCE_ACCESS_KEY)).replace('\n', '')
     headers = {'Authorization': 'Basic %s' % base64string}
     r = requests.get(url, headers=headers, stream=True)
@@ -71,6 +74,7 @@ def download_video(url, job):
             fd.write(chunk)
             
 def get_jobs():
+    print "getting all the jobs"
     try:
         response = request(SAUCE_URL + SAUCE_USER + "/jobs?from=" + START_TIME)
         response.raise_for_status()
@@ -80,6 +84,7 @@ def get_jobs():
         sys.exit(1)
         
 def get_job_status(job):
+    print "getting job status"
     try:
         response = request(SAUCE_URL + SAUCE_USER + "/jobs/" + job)
         response.raise_for_status()
@@ -91,6 +96,7 @@ def get_job_status(job):
         sys.exit(1)
         
 def get_job_assets(job):
+    print "getting job assets"
     try:
         LOGGER.info("Getting selenium log for job: " + job)
         download_log(SAUCE_URL + SAUCE_USER + "/jobs/" + job + "/assets/selenium-server.log", job)
@@ -102,6 +108,7 @@ def get_job_assets(job):
         sys.exit(1)
         
 def output_job(job):
+    print "logging job status"
     global exit_flag
     
     auth_key = hmac.new(SAUCE_USER + ":" + SAUCE_ACCESS_KEY, job, md5).hexdigest()
@@ -148,6 +155,7 @@ def append_job_json(job_json):
         fd.close()
     
 def analyze_browser_results(status, browser):
+    print "analyzing browser results"
     global FIREFOX_PASS
     global FIREFOX_TOTAL
 
@@ -202,12 +210,17 @@ def setup_logging():
     return logger
 
 #Start
+print "started python script"
 logging.captureWarnings(True)
 LOGGER = setup_logging()
+print "logger set up"
 
+print "getting jobs"
 LOGGER.info("Getting jobs...")
 jobs_json = get_jobs().json()
+print "got jobs"
 
+print "procesing jobs"
 #loop through each job in the list and process its assets
 with open(JOB_DATA, 'wb') as fd:
     fd.write("[")
@@ -220,6 +233,7 @@ for key in jobs_json:
 with open(JOB_DATA, 'a') as fd:
     fd.write("{}]")
     fd.close()    
+print "done processing, file written"
     
 #log test results
 #print LABEL_GREEN
