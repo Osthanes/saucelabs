@@ -119,7 +119,7 @@ function custom_cmd {
     eval #COMMAND#
     RESULT=$?
     echo \"running python script!\"
-    ${EXT_DIR}/sauce.py
+    python ${EXT_DIR}/sauce.py
     PY_RES=$?
     
     if [ \"$DOWNLOAD_ASSETS\" == true ]; then
@@ -146,6 +146,9 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 #sudo apt-get install -y python-setuptools
 #export PYTHONPATH=$PYTHONPATH:/tmp
 #easy_install --install-dir=/tmp prettytable
+
+ls
+ls ${EXT_DIR}
 
 echo \"Download Assets: \"
 echo $DOWNLOAD_ASSETS
