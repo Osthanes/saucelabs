@@ -53,6 +53,7 @@ cmd_choice=$CMD_CHOICE
 function execute { 
     eval $cmd_choice
     RESULT=$?
+    echo "running python script!"
     ${EXT_DIR}/sauce.py
     PY_RES=$?
     
