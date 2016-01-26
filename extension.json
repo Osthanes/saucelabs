@@ -147,9 +147,6 @@ echo -e \"Init runtime of `date -u -d @\"$INIT_EST_TIME\" +\'%-Mm %-Ss\'`\"
 #export PYTHONPATH=$PYTHONPATH:/tmp
 #easy_install --install-dir=/tmp prettytable
 
-ls
-ls ${EXT_DIR}
-
 echo \"Download Assets: \"
 echo $DOWNLOAD_ASSETS
 
