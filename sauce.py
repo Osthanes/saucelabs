@@ -53,6 +53,7 @@ def request(url):
     print "basic request"
     base64string = base64.encodestring('%s:%s' % (SAUCE_USER, SAUCE_ACCESS_KEY)).replace('\n', '')
     headers = {'Authorization': 'Basic %s' % base64string}
+    print url
     return requests.get(url, headers=headers)
 
 def download_log(url, job):
@@ -139,8 +140,8 @@ def output_job(job):
     #job failed
     else:
         print LABEL_RED
-       LOGGER.error("There was problem with job %s." % job)
-       LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
+        LOGGER.error("There was problem with job %s." % job)
+        LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
         analyze_browser_results(1, browser)
         exit_flag = 1
