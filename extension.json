@@ -5,12 +5,12 @@
     "desc_key": "ExtDesc",
     "extension_type": "Test",
     "message_key": "ExtMessage",
-    "service_binding": {
+    "service_binding": [
         "saucelabs": {
-            "name": "USER_ID",
+            "username": "USER_ID",
             "key": "ACCESS"
         }
-    },
+    ],
     "inputs": [
         {
             "type": "Bluemix",
