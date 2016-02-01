@@ -70,6 +70,10 @@ function execute {
 }
 
 if [[ $cmd_choice == "npm test" ]] || [[ $cmd_choice == "grunt test" ]] || [[ $cmd_choice == "grunt" ]]; then
+    if [[ ! -f package.json ]]; then
+        echo "No tests to run. Exiting..."
+        exit 0
+    fi
     npm install
     execute
 fi
