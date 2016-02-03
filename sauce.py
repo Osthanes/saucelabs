@@ -50,6 +50,7 @@ SAFARI_TOTAL = 0
 JOB_DATA = "job_data_collection.json"
 
 def request(url):
+    print url
     base64string = base64.encodestring('%s:%s' % (SAUCE_USER, SAUCE_ACCESS_KEY)).replace('\n', '')
     headers = {'Authorization': 'Basic %s' % base64string}
     return requests.get(url, headers=headers)
@@ -214,6 +215,7 @@ with open(JOB_DATA, 'wb') as fd:
     fd.close()
     
 LOGGER.info("Processing jobs...")
+print jobs_json
 for key in jobs_json:
     output_job(key["id"])
     
