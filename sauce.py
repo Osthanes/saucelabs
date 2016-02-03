@@ -27,7 +27,7 @@ TEST_URL = "https://saucelabs.com/jobs/%s?auth=%s"
 SAUCE_URL = "https://saucelabs.com/rest/v1/"
 SAUCE_USER = os.environ.get('SAUCE_USERNAME')
 SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
-print os.environ.get('INIT_START_TIME')
+#print os.environ.get('INIT_START_TIME')
 START_TIME = str(int(os.environ.get('INIT_START_TIME')) - 100)
 DOWNLOAD_ASSETS = os.environ.get('DOWNLOAD_ASSETS')
 
@@ -51,7 +51,7 @@ SAFARI_TOTAL = 0
 JOB_DATA = "job_data_collection.json"
 
 def request(url):
-    print url
+    #print url
     base64string = base64.encodestring('%s:%s' % (SAUCE_USER, SAUCE_ACCESS_KEY)).replace('\n', '')
     headers = {'Authorization': 'Basic %s' % base64string}
     return requests.get(url, headers=headers)
@@ -216,7 +216,7 @@ with open(JOB_DATA, 'wb') as fd:
     fd.close()
     
 LOGGER.info("Processing jobs...")
-print jobs_json
+#print jobs_json
 for key in jobs_json:
     output_job(key["id"])
     
