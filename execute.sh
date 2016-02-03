@@ -51,8 +51,7 @@ cmd_choice=$CMD_CHOICE
 function execute { 
     eval $cmd_choice
     RESULT=$?
-    echo "running python script!"
-    python ${EXT_DIR}/sauce.py
+    ${EXT_DIR}/sauce.py
     PY_RES=$?
     
     if [ "${DOWNLOAD_ASSETS}" == true ]; then
