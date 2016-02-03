@@ -27,7 +27,7 @@ TEST_URL = "https://saucelabs.com/jobs/%s?auth=%s"
 SAUCE_URL = "https://saucelabs.com/rest/v1/"
 SAUCE_USER = os.environ.get('SAUCE_USERNAME')
 SAUCE_ACCESS_KEY = os.environ.get('SAUCE_ACCESS_KEY')
-START_TIME = str(int(os.environ.get('INIT_START_TIME')) - 10000)
+START_TIME = str(int(os.environ.get('INIT_START_TIME')) - 5000)
 DOWNLOAD_ASSETS = os.environ.get('DOWNLOAD_ASSETS')
 
 chunk_size = 1024
