@@ -124,7 +124,6 @@ fi
 function custom_cmd {
     eval #COMMAND#
     RESULT=$?
-    sleep 5
     ${EXT_DIR}/sauce.py
     PY_RES=$?
     
