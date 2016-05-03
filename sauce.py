@@ -209,13 +209,13 @@ logging.captureWarnings(True)
 LOGGER = setup_logging()
 
 LOGGER.info("Getting jobs...")
-if os.path.isfile(JOBS_FILE_NAME):
-    #read job ids from text file
-    ID_FILE = True
-    with open(JOBS_FILE_NAME) as f:
-        id_lines = [line.rstrip('\n') for line in open(JOBS_FILE_NAME)]
-else:
-    jobs_json = get_jobs().json()
+# if os.path.isfile(JOBS_FILE_NAME):
+#     #read job ids from text file
+#     ID_FILE = True
+#     with open(JOBS_FILE_NAME) as f:
+#         id_lines = [line.rstrip('\n') for line in open(JOBS_FILE_NAME)]
+# else:
+jobs_json = get_jobs().json()
 
 #loop through each job in the list and process its assets
 with open(JOB_DATA, 'wb') as fd:
@@ -224,12 +224,12 @@ with open(JOB_DATA, 'wb') as fd:
 
 LOGGER.info("Processing jobs...")
 #print jobs_json
-if not ID_FILE:
-    for key in jobs_json:
-        output_job(key["id"])
-else:
-    for job_id in id_lines:
-        output_job(job_id)
+# if not ID_FILE:
+for key in jobs_json:
+    output_job(key["id"])
+# else:
+#     for job_id in id_lines:
+#         output_job(job_id)
 
 with open(JOB_DATA, 'a') as fd:
     fd.write("{}]")
