@@ -1,0 +1,20 @@
+saucelabs1,Properties Analyzer,saucelabs\Language.properties,ExtName,Sauce Labs
+saucelabs2,Properties Analyzer,saucelabs\Language.properties,ExtDesc,Executes Javascript/Node or Java tests using Sauce Labs.
+saucelabs3,Properties Analyzer,saucelabs\Language.properties,ExtMessage,This extension executes selenium tests in the cloud using Sauce Labs.  It is recommended that your tests and this job configuration define HOST, PORT and APP_URL as environment properties.  In addition, update your deploy job to define an CF_APP_NAME environment property to make the application url available to this job. (e.g. 'export CF_APP_NAME="$CF_APP"')
+saucelabs4,Properties Analyzer,saucelabs\Language.properties,USER_ID_KEY,Username
+saucelabs5,Properties Analyzer,saucelabs\Language.properties,USER_ID_DESC,The Sauce Labs username.  Tests should use the SAUCE_USERNAME environment variable.
+saucelabs6,Properties Analyzer,saucelabs\Language.properties,ACCESS_KEY,Access Key
+saucelabs7,Properties Analyzer,saucelabs\Language.properties,ACCESS_KEY_DESC,The Sauce Labs access key.  Tests should use the SAUCE_ACCESS_KEY environment variable.
+saucelabs8,Properties Analyzer,saucelabs\Language.properties,SELECT_CMD_KEY,Test Execution Command:
+saucelabs9,Properties Analyzer,saucelabs\Language.properties,SELECT_CMD_DESC,Please select the test command that best fits the project test configuration.
+saucelabs10,Properties Analyzer,saucelabs\Language.properties,EMPTY_KEY,\ 
+saucelabs11,Properties Analyzer,saucelabs\Language.properties,NPM_KEY,npm test
+saucelabs12,Properties Analyzer,saucelabs\Language.properties,GRUNT_KEY,grunt
+saucelabs13,Properties Analyzer,saucelabs\Language.properties,GRUNT_T_KEY,grunt test
+saucelabs14,Properties Analyzer,saucelabs\Language.properties,ANT_KEY,ant test
+saucelabs15,Properties Analyzer,saucelabs\Language.properties,MVN_KEY,mvn test
+saucelabs16,Properties Analyzer,saucelabs\Language.properties,CUSTOM_KEY,Custom...
+saucelabs17,Properties Analyzer,saucelabs\Language.properties,COMMAND_KEY,Custom Test Execution Command:
+saucelabs18,Properties Analyzer,saucelabs\Language.properties,COMMAND_DESC,Enter the command(s) used to execute the tests for the project.
+saucelabs19,Properties Analyzer,saucelabs\Language.properties,ASSET_KEY,Download Selenium logs and job videos
+saucelabs20,Properties Analyzer,saucelabs\Language.properties,ASSET_DESC,Choose whether to download Selenium logs and videos from jobs as artifacts.
