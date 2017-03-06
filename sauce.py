@@ -9,6 +9,7 @@ import base64
 import urllib2
 import logging
 import hmac
+import subprocess
 from hashlib import md5
 #from prettytable import PrettyTable
 
@@ -31,9 +32,19 @@ START_TIME = str(int(os.environ.get('INIT_START_TIME')) - 100)
 DOWNLOAD_ASSETS = os.environ.get('DOWNLOAD_ASSETS')
 JOBS_FILE_NAME = "ids.txt"
 
+#environment pipeline variables
+PIPELINE_TASK_ID = os.environ.get('TASK_ID')
+PIPELINE_JOB_EXTENSION_ID = os.environ.get('PIPELINE_JOB_EXTENSION_ID')
+PIPELINE_SCRIPTS_DIR = os.environ.get('PIPELINE_SCRIPTS_DIR')
+PIPELINE_TMP_DIR = os.environ.get('TMPDIR')
+PIPELINE_EXTENSION_DATA_PATH = PIPELINE_TMP_DIR + "/" + PIPELINE_JOB_EXTENSION_ID + ".json"
+PIPELINE_SAVE_EXTENSION_SCRIPT_PATH = PIPELINE_SCRIPTS_DIR + "/ids-set-extension-data.sh"
+
 chunk_size = 1024
 
 exit_flag = 0
+
+test_urls = []
 
 #browser test stat vars
 FIREFOX_PASS = 0
@@ -103,6 +114,42 @@ def get_job_assets(job):
         print e
         sys.exit(1)
 
+def add_test_urls_to_extension_file():
+    # attempt to read the current extension data, valid for it to not exist
+    try:
+        with open(PIPELINE_EXTENSION_DATA_PATH, 'r') as extension_file:
+            extension_data = json.load(extension_file)
+    except (OSError, IOError, ValueError):
+        extension_data = {}
+
+    # for each test url, add it to the extension JSON
+    for url in test_urls:
+        if ('pipeline_ui' not in extension_data):
+            extension_data['pipeline_ui'] = [{'job_execution_id': PIPELINE_TASK_ID, 'url': url}]
+        else:
+            execution_found = False
+            for job_execution_data in extension_data['pipeline_ui']:
+                if (job_execution_data['job_execution_id'] == PIPELINE_TASK_ID):
+                    execution_found = True
+                    if ('url' in job_execution_data):
+                        oldUrl = job_execution_data['url']
+                        del job_execution_data['url']
+                        job_execution_data['urls'] = [oldUrl, url]
+                    elif ('urls' in job_execution_data):
+                        job_execution_data['urls'].append(url)
+                    else:
+                        job_execution_data['url'] = url
+            if (not execution_found):
+                extension_data['pipeline_ui'].append({'job_execution_id': PIPELINE_TASK_ID, 'url': url})
+
+    # write the extension data back out to the file
+    try:
+        with open(PIPELINE_EXTENSION_DATA_PATH, 'w') as extension_file:
+            json.dump(extension_data, extension_file)
+    except (OSError, IOError, ValueError) as e:
+        print e
+        sys.exit(1)
+
 def output_job(job):
     global exit_flag
 
@@ -139,6 +186,8 @@ def output_job(job):
         print LABEL_NO_COLOR
         analyze_browser_results(1, browser)
         exit_flag = 1
+
+    test_urls.append(TEST_URL % (job, auth_key))
 
     #download assets
     if DOWNLOAD_ASSETS == "true":
@@ -202,6 +251,14 @@ def setup_logging():
     logger.addHandler(handler)
 
     return logger
+
+# calls ids-set-extension-data.sh, which saves the extension json to pipeline
+def save_extension_data_to_pipeline():
+    try:
+        subprocess.Popen(PIPELINE_SAVE_EXTENSION_SCRIPT_PATH, env=os.environ)
+    except (OSError, IOError) as e:
+        print e
+        sys.exit(1)
 
 #Start
 ID_FILE = False
@@ -281,6 +338,10 @@ if SAFARI_TOTAL - SAFARI_PASS > 0:
     print '%d jobs failed.' % (SAFARI_TOTAL - SAFARI_PASS)
 print LABEL_NO_COLOR
 print STARS
+
+# add test url(s) to extension file and save to pipeline
+add_test_urls_to_extension_file()
+save_extension_data_to_pipeline()
 
 #exit with appropriate status
 sys.exit(exit_flag)
