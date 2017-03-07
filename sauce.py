@@ -44,7 +44,8 @@ chunk_size = 1024
 
 exit_flag = 0
 
-test_urls = []
+success_test_urls = []
+failure_test_urls = []
 
 #browser test stat vars
 FIREFOX_PASS = 0
@@ -122,25 +123,29 @@ def add_test_urls_to_extension_file():
     except (OSError, IOError, ValueError):
         extension_data = {}
 
-    # for each test url, add it to the extension JSON
-    for url in test_urls:
-        if ('pipeline_ui' not in extension_data):
-            extension_data['pipeline_ui'] = [{'job_execution_id': PIPELINE_TASK_ID, 'url': url}]
-        else:
-            execution_found = False
-            for job_execution_data in extension_data['pipeline_ui']:
-                if (job_execution_data['job_execution_id'] == PIPELINE_TASK_ID):
-                    execution_found = True
-                    if ('url' in job_execution_data):
-                        oldUrl = job_execution_data['url']
-                        del job_execution_data['url']
-                        job_execution_data['urls'] = [oldUrl, url]
-                    elif ('urls' in job_execution_data):
-                        job_execution_data['urls'].append(url)
-                    else:
-                        job_execution_data['url'] = url
-            if (not execution_found):
-                extension_data['pipeline_ui'].append({'job_execution_id': PIPELINE_TASK_ID, 'url': url})
+    # determine which url to display
+    url = ""
+    status = "passed"
+    if (len(failure_test_urls) > 0):
+        url = failure_test_urls[0]
+        status = "failed"
+    elif (len(success_test_urls) == 1):
+        url = success_test_urls[0]
+    else:
+        url = "https://saucelabs.com/beta/dashboard/tests"
+
+    # add the url to the json
+    if ('pipeline_ui' not in extension_data):
+        extension_data['pipeline_ui'] = [{'job_execution_id': PIPELINE_TASK_ID, 'url': url, 'status': status}]
+    else:
+        execution_found = False
+        for job_execution_data in extension_data['pipeline_ui']:
+            if (job_execution_data['job_execution_id'] == PIPELINE_TASK_ID):
+                execution_found = True
+                job_execution_data['url'] = url
+                job_execution_data['status'] = status
+        if (not execution_found):
+            extension_data['pipeline_ui'].append({'job_execution_id': PIPELINE_TASK_ID, 'url': url, 'status': status})
 
     # write the extension data back out to the file
     try:
@@ -166,12 +171,14 @@ def output_job(job):
         LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
         analyze_browser_results(0, browser)
+        success_test_urls.append(TEST_URL % (job, auth_key))
     elif test_status == "complete":
         print LABEL_GREEN
         LOGGER.info("Job %s completed successfully." % job)
         LOGGER.info("See details at: " + TEST_URL % (job, auth_key))
         print LABEL_NO_COLOR
         analyze_browser_results(0, browser)
+        success_test_urls.append(TEST_URL % (job, auth_key))
     #for some reason job is still running
     elif test_status == "in progress":
         print LABEL_YELLOW
@@ -186,8 +193,7 @@ def output_job(job):
         print LABEL_NO_COLOR
         analyze_browser_results(1, browser)
         exit_flag = 1
-
-    test_urls.append(TEST_URL % (job, auth_key))
+        failure_test_urls.append(TEST_URL % (job, auth_key))
 
     #download assets
     if DOWNLOAD_ASSETS == "true":
