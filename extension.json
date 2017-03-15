@@ -107,6 +107,14 @@ set +x
 set +e 
 export INIT_START_TIME=$(date +\"%s\")
 
+#############
+# Colors    #
+#############
+export green=\'\\x1B[0;32m\'
+export red=\'\\x1B[0;31m\'
+export label_color=\'\\x1B[0;33m\'
+export no_color=\'\\x1B[0m\'
+
 export SAUCE_USERNAME=#USER_ID#
 export SAUCE_ACCESS_KEY=#ACCESS#
 export CMD_CHOICE=\"#SELECT_CMD#\"
@@ -119,6 +127,15 @@ fi
         
 if [ -z \"$PORT\" ]; then
     export PORT=80
+fi
+
+#check if we have valid saucelabs creds
+ENCODED_TOKEN=$(echo -ne \"$SAUCE_USERNAME:$SAUCE_ACCESS_KEY\" | base64);
+isAuthed=$(curl --write-out \"%{http_code}\n\" --silent --output /dev/null \"https://saucelabs.com/rest/v1/users/$SAUCE_USERNAME\" -H \"Authorization: basic $ENCODED_TOKEN\")
+
+if [ \"$isAuthed\" != \"200\" ]; then
+  echo -e \"${red}Authentication against Saucelabs failed, ensure your Saucelabs credentials are correctly set from within your toolchain.${no_color}\"
+  exit 1
 fi
 
 function custom_cmd {
