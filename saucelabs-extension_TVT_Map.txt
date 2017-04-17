@@ -1,0 +1,20 @@
+saucelabs-extension1,Properties Analyzer,saucelabs-extension\Language.properties,ExtName,Sauce Labs
+saucelabs-extension2,Properties Analyzer,saucelabs-extension\Language.properties,ExtDesc,Executes Javascript/Node or Java tests using Sauce Labs.
+saucelabs-extension3,Properties Analyzer,saucelabs-extension\Language.properties,ExtMessage,This extension executes selenium tests in the cloud using Sauce Labs.  It is recommended that your tests and this job configuration define HOST, PORT and APP_URL as environment properties.  In addition, update your deploy job to define an CF_APP_NAME environment property to make the application url available to this job. (e.g. 'export CF_APP_NAME="$CF_APP"')
+saucelabs-extension4,Properties Analyzer,saucelabs-extension\Language.properties,USER_ID_KEY,Username
+saucelabs-extension5,Properties Analyzer,saucelabs-extension\Language.properties,USER_ID_DESC,The Sauce Labs username.  Tests should use the SAUCE_USERNAME environment variable.
+saucelabs-extension6,Properties Analyzer,saucelabs-extension\Language.properties,ACCESS_KEY,Access Key
+saucelabs-extension7,Properties Analyzer,saucelabs-extension\Language.properties,ACCESS_KEY_DESC,The Sauce Labs access key.  Tests should use the SAUCE_ACCESS_KEY environment variable.
+saucelabs-extension8,Properties Analyzer,saucelabs-extension\Language.properties,SELECT_CMD_KEY,Test Execution Command:
+saucelabs-extension9,Properties Analyzer,saucelabs-extension\Language.properties,SELECT_CMD_DESC,Please select the test command that best fits the project test configuration.
+saucelabs-extension10,Properties Analyzer,saucelabs-extension\Language.properties,EMPTY_KEY,Select...
+saucelabs-extension11,Properties Analyzer,saucelabs-extension\Language.properties,NPM_KEY,npm test
+saucelabs-extension12,Properties Analyzer,saucelabs-extension\Language.properties,GRUNT_KEY,grunt
+saucelabs-extension13,Properties Analyzer,saucelabs-extension\Language.properties,GRUNT_T_KEY,grunt test
+saucelabs-extension14,Properties Analyzer,saucelabs-extension\Language.properties,ANT_KEY,ant test
+saucelabs-extension15,Properties Analyzer,saucelabs-extension\Language.properties,MVN_KEY,mvn test
+saucelabs-extension16,Properties Analyzer,saucelabs-extension\Language.properties,CUSTOM_KEY,Custom...
+saucelabs-extension17,Properties Analyzer,saucelabs-extension\Language.properties,COMMAND_KEY,Custom Test Execution Command:
+saucelabs-extension18,Properties Analyzer,saucelabs-extension\Language.properties,COMMAND_DESC,Enter the command(s) used to execute the tests for the project.
+saucelabs-extension19,Properties Analyzer,saucelabs-extension\Language.properties,ASSET_KEY,Download Selenium logs and job videos
+saucelabs-extension20,Properties Analyzer,saucelabs-extension\Language.properties,ASSET_DESC,Choose whether to download Selenium logs and videos from jobs as artifacts.
