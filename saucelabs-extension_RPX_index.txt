@@ -1,0 +1,20 @@
+00001	saucelabs-extension/Language.properties	ExtName=	Sauce Labs
+00002	saucelabs-extension/Language.properties	ExtDesc=	Executes Javascript/Node or Java tests using Sauce Labs.
+00003	saucelabs-extension/Language.properties	ExtMessage=	This extension executes selenium tests in the cloud using Sauce Labs.  It is recommended that your tests and this job configuration define HOST, PORT and APP_URL as environment properties.  In addition, update your deploy job to define an CF_APP_NAME environment property to make the application url available to this job. (e.g. 'export CF_APP_NAME="$CF_APP"')
+00004	saucelabs-extension/Language.properties	USER_ID_KEY=	Username
+00005	saucelabs-extension/Language.properties	USER_ID_DESC=	The Sauce Labs username.  Tests should use the SAUCE_USERNAME environment variable.
+00006	saucelabs-extension/Language.properties	ACCESS_KEY=	Access Key
+00007	saucelabs-extension/Language.properties	ACCESS_KEY_DESC=	The Sauce Labs access key.  Tests should use the SAUCE_ACCESS_KEY environment variable.
+00008	saucelabs-extension/Language.properties	SELECT_CMD_KEY=	Test Execution Command:
+00009	saucelabs-extension/Language.properties	SELECT_CMD_DESC=	Please select the test command that best fits the project test configuration.
+00010	saucelabs-extension/Language.properties	EMPTY_KEY=	Select...
+00011	saucelabs-extension/Language.properties	NPM_KEY=	npm test
+00012	saucelabs-extension/Language.properties	GRUNT_KEY=	grunt
+00013	saucelabs-extension/Language.properties	GRUNT_T_KEY=	grunt test
+00014	saucelabs-extension/Language.properties	ANT_KEY=	ant test
+00015	saucelabs-extension/Language.properties	MVN_KEY=	mvn test
+00016	saucelabs-extension/Language.properties	CUSTOM_KEY=	Custom...
+00017	saucelabs-extension/Language.properties	COMMAND_KEY=	Custom Test Execution Command:
+00018	saucelabs-extension/Language.properties	COMMAND_DESC=	Enter the command(s) used to execute the tests for the project.
+00019	saucelabs-extension/Language.properties	ASSET_KEY=	Download Selenium logs and job videos
+00020	saucelabs-extension/Language.properties	ASSET_DESC=	Choose whether to download Selenium logs and videos from jobs as artifacts.
